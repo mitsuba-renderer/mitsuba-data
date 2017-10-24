@@ -1,0 +1,31 @@
+<scene version='2.0.0'>
+
+    <integrator type='depth'>
+    </integrator>
+
+    <sensor type="perspective">
+        <float name="near_clip" value="1"/>
+        <float name="far_clip" value="1000"/>
+
+        <transform name="to_world">
+            <lookat target="0.0, 0.0, 1.5"
+                    origin="1.5, -14.0, 1.5"
+                    up    ="0.0, 0.0, 1.0"/>
+        </transform>
+
+        <film type="hdrfilm">
+            <integer name="width" value="192"/>
+            <integer name="height" value="108"/>
+        </film>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="32"/>
+        </sampler>
+    </sensor>
+
+
+    <shape type="ply">
+        <string name="filename"
+                value="mitsuba-text.ply"/>
+    </shape>
+</scene>
