@@ -1,6 +1,6 @@
 <scene version='2.0.0'>
 
-    <integrator type='direct'>
+    <integrator type='depth'>
     </integrator>
 
     <sensor type="perspective">
@@ -9,22 +9,25 @@
 
         <transform name="to_world">
             <lookat target="0.0, 0.0, 1.5"
-                    origin="1.5, -14.0, 1.5"
+                    origin="0.0, -9.0, 1.5"
                     up    ="0.0, 0.0, 1.0"/>
         </transform>
 
         <film type="hdrfilm">
-            <integer name="width" value="192"/>
-            <integer name="height" value="108"/>
+            <integer name="width" value="150"/>
+            <integer name="height" value="150"/>
         </film>
 
         <sampler type="independent">
-            <integer name="sample_count" value="32"/>
+            <integer name="sample_count" value="4"/>
         </sampler>
     </sensor>
 
+
     <shape type="ply">
         <string name="filename"
-                value="mitsuba-text.ply"/>
+                value="../ply/teapot.ply"/>
+
+        <!-- <emitter type="area"> </emitter> -->
     </shape>
 </scene>
