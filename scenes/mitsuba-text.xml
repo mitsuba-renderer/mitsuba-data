@@ -1,6 +1,10 @@
 <scene version='2.0.0'>
 
-    <integrator type='direct'>
+    <!-- <integrator type='direct'>
+        <integer name="emitter_samples" value="4"/>
+        <integer name="bsdf_samples" value="0"/>
+    </integrator> -->
+    <integrator type='depth'>
     </integrator>
 
     <sensor type="perspective">
@@ -19,12 +23,29 @@
         </film>
 
         <sampler type="independent">
-            <integer name="sample_count" value="32"/>
+            <integer name="sample_count" value="8"/>
         </sampler>
     </sensor>
 
     <shape type="ply">
         <string name="filename"
                 value="mitsuba-text.ply"/>
+
+        <bsdf type="diffuse">
+            <spectrum name="radiance" value="0.1f, 0.3f, 1.0f, 0.5f"/>
+        </bsdf>
     </shape>
+
+    <!-- <emitter type="point">
+        <point name="position" x="1.5" y="-14.0" z="1.5"/>
+        <spectrum name="intensity" value="3.0f, 3.0f, 3.0f, 0.5f"/>
+    </emitter>
+    <emitter type="point">
+        <point name="position" x="2" y="-6.0" z="4.5"/>
+        <spectrum name="intensity" value="3.0f, 3.0f, 3.0f, 0.5f"/>
+    </emitter> -->
+    <emitter type="point">
+        <point name="position" x="1.5" y="-14" z="1.5"/>
+        <spectrum name="intensity" value="1.0f, 0.05f, 0.0f, 0.5f"/>
+    </emitter>
 </scene>
