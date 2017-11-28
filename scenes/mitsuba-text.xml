@@ -1,11 +1,11 @@
 <scene version='2.0.0'>
 
-    <!-- <integrator type='direct'>
+    <integrator type='direct'>
         <integer name="emitter_samples" value="4"/>
         <integer name="bsdf_samples" value="0"/>
-    </integrator> -->
-    <integrator type='depth'>
     </integrator>
+    <!-- <integrator type='depth'> -->
+    <!-- </integrator> -->
 
     <sensor type="perspective">
         <float name="near_clip" value="1"/>
@@ -13,7 +13,7 @@
 
         <transform name="to_world">
             <lookat target="0.0, 0.0, 1.5"
-                    origin="1.5, -14.0, 1.5"
+                    origin="3, -14.0, 5"
                     up    ="0.0, 0.0, 1.0"/>
         </transform>
 
@@ -36,14 +36,14 @@
         </bsdf>
     </shape>
 
-    <!-- <emitter type="point">
+    <emitter type="point">
         <point name="position" x="1.5" y="-14.0" z="1.5"/>
         <spectrum name="intensity" value="3.0f, 3.0f, 3.0f, 0.5f"/>
     </emitter>
     <emitter type="point">
         <point name="position" x="2" y="-6.0" z="4.5"/>
         <spectrum name="intensity" value="3.0f, 3.0f, 3.0f, 0.5f"/>
-    </emitter> -->
+    </emitter>
     <emitter type="point">
         <point name="position" x="1.5" y="-14" z="1.5"/>
         <spectrum name="intensity" value="1.0f, 0.05f, 0.0f, 0.5f"/>
