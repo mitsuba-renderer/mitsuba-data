@@ -4,8 +4,6 @@
         <integer name="emitter_samples" value="4"/>
         <integer name="bsdf_samples" value="0"/>
     </integrator>
-    <!-- <integrator type='depth'>
-    </integrator> -->
 
     <sensor type="perspective">
         <float name="near_clip" value="1"/>
@@ -18,6 +16,7 @@
         </transform>
 
         <film type="hdrfilm">
+            <rfilter type="box"/>
             <integer name="width" value="190"/>
             <integer name="height" value="183"/>
         </film>
@@ -27,19 +26,6 @@
         </sampler>
     </sensor>
 
-    <!-- <shape type="ply">
-        <string name="filename"
-                value="../ply/teapot.ply"/>
-
-        <bsdf type="diffuse">
-            <spectrum name="radiance" value="0.0f, 0.0f, 0.0f, 0.0f"/>
-        </bsdf>
-
-        <emitter type="area">
-            <spectrum name="radiance" value="0.0f, 0.0f, 10.0f, 0.0f"/>
-        </emitter>
-    </shape>
- -->
     <shape type="ply">
         <string name="filename"
                 value="../ply/teapot.ply"/>
