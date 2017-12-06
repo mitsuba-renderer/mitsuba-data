@@ -31,7 +31,7 @@
                 value="../ply/teapot.ply"/>
 
         <bsdf type="diffuse">
-            <spectrum name="radiance" value="0.0f, 1.0f, 10.0f, 0.0f"/>
+            <spectrum name="reflectance" value="0.0f, 1.0f, 10.0f, 0.0f"/>
         </bsdf>
 
         <transform name="to_world">
