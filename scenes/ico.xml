@@ -1,7 +1,7 @@
 <scene version='2.0.0'>
 
     <integrator type='direct'>
-        <integer name="emitter_samples" value="64"/>
+        <integer name="emitter_samples" value="32"/>
         <integer name="bsdf_samples" value="0"/>
     </integrator>
 
@@ -16,12 +16,12 @@
         </transform>
 
         <film type="hdrfilm">
-            <integer name="width" value="192"/>
-            <integer name="height" value="108"/>
+            <integer name="width" value="1024"/>
+            <integer name="height" value="768"/>
         </film>
 
         <sampler type="independent">
-            <integer name="sample_count" value="32"/>
+            <integer name="sample_count" value="4"/>
         </sampler>
     </sensor>
 
@@ -35,10 +35,10 @@
         </transform>
 
         <bsdf type="diffuse">
-            <spectrum name="radiance" value="0.0f, 0.0f, 0.0f, 0.0f"/>
+            <spectrum name="reflectance" value="400:0.0f, 500:0.0f, 600:0.0f, 700:0.0f"/>
         </bsdf>
         <emitter type="area">
-            <spectrum name="radiance" value="0.0f, 100.0f, 1000.0f, 1000.0f"/>
+            <spectrum name="radiance" value="400:0.0f, 500:100.0f, 600:100.0f, 700:100.0f"/>
         </emitter>
     </shape>
 
@@ -51,7 +51,7 @@
         </transform>
 
         <bsdf type="diffuse">
-            <spectrum name="radiance" value="1.0f, 1.0f, 1.0f, 1.0f"/>
+            <spectrum name="reflectance" value="400:1.0f, 500:1.0f, 600:1.0f, 700:1.0f"/>
         </bsdf>
     </shape>
     <shape type="ply">
@@ -64,7 +64,7 @@
         </transform>
 
         <bsdf type="diffuse">
-            <spectrum name="radiance" value="1.0f, 1.0f, 1.0f, 1.0f"/>
+            <spectrum name="reflectance" value="400:1.0f, 500:1.0f, 600:1.0f, 700:1.0f"/>
         </bsdf>
     </shape>
 </scene>

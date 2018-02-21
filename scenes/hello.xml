@@ -17,8 +17,8 @@
 
         <film type="hdrfilm">
             <rfilter type="box"/>
-            <integer name="width" value="190"/>
-            <integer name="height" value="183"/>
+            <integer name="width" value="1024"/>
+            <integer name="height" value="768"/>
         </film>
 
         <sampler type="independent">
@@ -31,7 +31,7 @@
                 value="../ply/teapot.ply"/>
 
         <bsdf type="diffuse">
-            <spectrum name="reflectance" value="0.0f, 1.0f, 10.0f, 0.0f"/>
+            <spectrum name="reflectance" value="400:0.0f, 500:1.0f, 600:10.0f, 700:0.0f"/>
         </bsdf>
 
         <transform name="to_world">
@@ -42,10 +42,10 @@
 
     <emitter type="point">
         <point name="position" x="2" y="-6.0" z="4.5"/>
-        <spectrum name="intensity" value="10.0f, 10.0f, 10.0f, 10.0f"/>
+        <spectrum name="intensity" value="400:10.0f, 500:10.0f, 600:10.0f, 700:10.0f"/>
     </emitter>
     <emitter type="point">
         <point name="position" x="-3" y="-3.0" z="-0.5"/>
-        <spectrum name="intensity" value="1.0f, 1.0f, 1.0f, 1.0f"/>
+        <spectrum name="intensity" value="400:1.0f, 500:1.0f, 600:1.0f, 700:1.0f"/>
     </emitter>
 </scene>
