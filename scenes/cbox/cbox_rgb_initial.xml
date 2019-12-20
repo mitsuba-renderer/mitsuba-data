@@ -1,9 +1,9 @@
 <scene version="2.0.0">
     <default name="spp" value="32"/>
+    <default name="max_depth" value="2"/>
 
     <integrator type="path">
-        <integer name="max_depth" value="3"/>
-        <!-- <integer name="max_depth" value="1"/> -->
+        <integer name="max_depth" value="$max_depth"/>
     </integrator>
 
     <sensor type="perspective">
@@ -39,7 +39,7 @@
         </bsdf>
         <emitter type="area">
             <!-- <spectrum name="radiance" value="1"/> -->
-            <rgb name="radiance" value="5, 5, 10"/>
+            <rgb name="radiance" value="18.387, 10.9873, 2.75357"/>
         </emitter>
     </shape>
 
