@@ -3,8 +3,8 @@ import glob
 import os
 import sys
 
-from mitsuba.core.xml import load_file
-from mitsuba.core import Thread, Bitmap, Struct
+from mitsuba.scalar_rgb.core.xml import load_file
+from mitsuba.scalar_rgb.core import Thread, Bitmap, Struct
 
 
 def load_scene(filename, *args, **kwargs):
@@ -21,10 +21,10 @@ def load_scene(filename, *args, **kwargs):
 
 
 def render(scene, write_to):
-    integrator = scene.integrator()
-    integrator.render(scene)
-    film = scene.sensor().film()
-    film.bitmap().convert(Bitmap.ERGB, Struct.EUInt8, True).write(write_to)
+    success = scene.integrator().render(scene, scene.sensors()[0])
+    assert success
+    film = scene.sensors()[0].film()
+    film.bitmap().convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
 
 
 def main(args):
@@ -41,10 +41,10 @@ def main(args):
     os.makedirs(images_folder, exist_ok=True)
     scenes = glob.glob(os.path.join(os.path.dirname(__file__), '*.xml'))
     for scene_name in scenes:
-        scene_path = os.path.abspath(scene_name)
-        scene = load_scene(scene_path, parameters=[('spp', str(spp))])
         img_path = os.path.join(images_folder, os.path.split(scene_name)[-1].replace('.xml', '.jpg'))
         if not os.path.isfile(img_path) or force:
+            scene_path = os.path.abspath(scene_name)
+            scene = load_scene(scene_path, parameters=[('spp', str(spp))])
             render(scene, img_path)
 
 
