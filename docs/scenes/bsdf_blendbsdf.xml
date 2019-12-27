@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<scene version="2.0.0">
+    <bsdf type="blendbsdf" id="object_bsdf">
+        <texture name="weight" type="bitmap">
+            <string name="filename" value="textures/pattern.png"/>
+        </texture>
+        <bsdf type="conductor">
+            <spectrum name="specular_reflectance" value="1"/>
+        </bsdf>
+        <bsdf type="roughplastic">
+            <spectrum name="diffuse_reflectance" value="0.1"/>
+        </bsdf>
+    </bsdf>
+
+    <include filename="include/matpreview.xml"/>
+</scene>
