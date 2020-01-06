@@ -40,75 +40,72 @@
             <rgb name="reflectance" value = "0.936461, 0.740433, 0.705267"/>
         </bsdf>
         <emitter type="area">
-            <!-- <spectrum name="radiance" value="10"/> -->
             <rgb name="radiance" value="18.387, 10.9873, 2.75357"/>
         </emitter>
     </shape>
 
     <shape type="obj">
         <string name="filename" value="meshes/cbox_floor.obj"/>
-        <bsdf type="diffuse" id="white_floor">
+
+        <!-- <bsdf type="diffuse" id="white_floor">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0.25, 0.25, 0.25"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
+        </bsdf> -->
+        <bsdf type="roughconductor" id="rough_floor">
+            <!-- <texture type="bitmap" name="alpha_texture">
+                <string name="filename" value="roughness-grid-target.exr"/>
+            </texture> -->
+            <spectrum name="alpha_texture" value="0.20"/>
+            <!-- <spectrum name="alpha_texture" value="0.05"/> -->
+            <spectrum name="eta" value = "0.01"/>
+            <!-- <rgb name="eta" value = "0.885809, 0.698859, 0.666422"/> -->
         </bsdf>
+
     </shape>
     <shape type="obj">
         <string name="filename" value="meshes/cbox_ceiling.obj"/>
         <bsdf type="diffuse" id="white_ceiling">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
     <shape type="obj">
         <string name="filename" value="meshes/cbox_back.obj"/>
         <bsdf type="diffuse" id="white_back">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0, 0.75, 0.75"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
     <shape type="obj">
         <string name="filename" value="meshes/cbox_greenwall.obj"/>
         <bsdf type="diffuse" id="green">
             <rgb name="reflectance" value = "0.105421, 0.37798, 0.076425"/>
-            <!-- <rgb name="reflectance" value = "0.25, 1, 0"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
     <shape type="obj">
         <string name="filename" value="meshes/cbox_redwall.obj"/>
         <bsdf type="diffuse" id="red">
             <rgb name="reflectance" value = "0.570068, 0.0430135, 0.0443706"/>
-            <!-- <rgb name="reflectance" value = "0.5, 0, 0.25"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
     <shape type="obj">
-
         <string name="filename" value="meshes/cbox_smallbox.obj"/>
-        <bsdf type="roughconductor" id="rough_small_box">
-            <!-- <float name="alpha" value="0.20"/> -->
-            <!-- <spectrum name="alpha_texture" value="0.20"/> -->
-            <rgb name="alpha_texture" value="0.20, 0.20, 0.20"/>
-            <rgb name="eta" value = "0.570068, 0.0430135, 0.0443706"/>
+        <bsdf type="diffuse" id="white_small_box">
+            <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
         </bsdf>
+
+        <!-- <bsdf type="roughconductor" id="rough_small_box">
+            <spectrum name="alpha_texture" value="0.20"/>
+            <rgb name="eta" value = "0.570068, 0.0430135, 0.0443706"/>
+        </bsdf> -->
     </shape>
     <shape type="obj">
         <string name="filename" value="meshes/cbox_largebox.obj"/>
-        <bsdf type="roughconductor" id="rough_large_box">
-            <!-- <spectrum name="alpha_texture" value="0.05"/> -->
-            <rgb name="alpha_texture" value="0.05, 0.05, 0.05"/>
-            <!-- <texture type="bitmap" name="alpha_texture">
-                <string name="filename" value="roughness-grid-target.exr"/>
-            </texture> -->
-            <rgb name="eta" value = "0.885809, 0.698859, 0.666422"/>
+        <bsdf type="diffuse" id="white_large_box">
+            <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
         </bsdf>
+        <!-- <bsdf type="roughconductor" id="rough_large_box">
+            <texture type="bitmap" name="alpha_texture">
+                <string name="filename" value="roughness-grid-target.exr"/>
+            </texture>
+            <rgb name="eta" value = "0.885809, 0.698859, 0.666422"/>
+        </bsdf> -->
     </shape>
 </scene>
