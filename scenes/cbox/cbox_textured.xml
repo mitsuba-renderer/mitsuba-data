@@ -1,6 +1,7 @@
 <scene version="2.0.0">
     <default name="spp" value="512"/>
     <default name="state" value="target"/>
+    <default name="res" value="720"/>
 
     <integrator type="path">
         <integer name="max_depth" value="3"/>
@@ -21,8 +22,8 @@
             <integer name="sample_count" value="$spp"/>
         </sampler>
         <film type="hdrfilm">
-            <integer name="width" value="720"/>
-            <integer name="height" value="720"/>
+            <integer name="width" value="$res"/>
+            <integer name="height" value="$res"/>
             <rfilter type="box"/>
             <string  name="pixel_format" value="rgb"/>
         </film>
