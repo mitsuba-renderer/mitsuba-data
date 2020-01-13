@@ -1,10 +1,11 @@
 <scene version="2.0.0">
     <default name="spp" value="512"/>
     <default name="state" value="target"/>
+    <default name="max_depth" value="3"/>
     <default name="res" value="720"/>
 
     <integrator type="path">
-        <integer name="max_depth" value="3"/>
+        <integer name="max_depth" value="$max_depth"/>
     </integrator>
 
     <sensor type="perspective">

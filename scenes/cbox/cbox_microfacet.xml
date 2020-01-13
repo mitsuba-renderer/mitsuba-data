@@ -1,6 +1,7 @@
 <scene version="2.0.0">
     <default name="spp" value="64"/>
     <default name="max_depth" value="3"/>
+    <default name="roughness" value="0.20"/>
 
 
     <integrator type="path">
@@ -54,10 +55,8 @@
             <!-- <texture type="bitmap" name="alpha_texture">
                 <string name="filename" value="roughness-grid-target.exr"/>
             </texture> -->
-            <spectrum name="alpha_texture" value="0.20"/>
-            <!-- <spectrum name="alpha_texture" value="0.05"/> -->
+            <spectrum name="alpha_texture" value="$roughness"/>
             <spectrum name="eta" value = "0.01"/>
-            <!-- <rgb name="eta" value = "0.885809, 0.698859, 0.666422"/> -->
         </bsdf>
 
     </shape>
