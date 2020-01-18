@@ -32,6 +32,14 @@
         </film>
     </sensor>
 
+    <!-- <emitter type="constant">
+        <spectrum name="radiance" value="1"/>
+    </emitter> -->
+    <emitter type="envmap" id="emitter-envmap">
+        <string name="filename" value="color-grid.exr"/>
+    </emitter>
+
+
     <shape type="obj">
         <string name="filename" value="meshes/cbox_luminaire.obj"/>
         <transform name="to_world">
@@ -41,7 +49,6 @@
             <rgb name="reflectance" value = "0.936461, 0.740433, 0.705267"/>
         </bsdf>
         <emitter type="area">
-            <!-- <spectrum name="radiance" value="10"/> -->
             <rgb name="radiance" value="18.387, 10.9873, 2.75357"/>
         </emitter>
     </shape>
