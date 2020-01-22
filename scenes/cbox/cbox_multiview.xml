@@ -1,0 +1,126 @@
+<scene version="2.0.0">
+    <default name="spp" value="64"/>
+    <default name="active_sensor" value="0"/>
+
+
+    <integer name="active_sensor" value="$active_sensor"/>
+    <integrator type="path">
+        <integer name="max_depth" value="5"/>
+    </integrator>
+
+    <sampler type="independent" id="sampler">
+        <integer name="sample_count" value="$spp"/>
+    </sampler>
+
+    <film type="hdrfilm" id="film">
+        <integer name="width" value="256"/>
+        <integer name="height" value="256"/>
+        <rfilter type="box"/>
+        <string name="pixel_format" value="rgb"/>
+    </film>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="near_clip" value="10"/>
+        <float name="far_clip" value="2800"/>
+        <float name="focus_distance" value="1000"/>
+        <float name="fov" value="39.3077"/>
+        <transform name="to_world">
+            <lookat origin="278, 273, -800"
+                    target="278, 273, -799"
+                    up    ="  0,   1,    0"/>
+
+        </transform>
+        <ref id="sampler"/>
+        <ref id="film"/>
+    </sensor>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="near_clip" value="10"/>
+        <float name="far_clip" value="2800"/>
+        <float name="focus_distance" value="1000"/>
+        <float name="fov" value="39.3077"/>
+        <transform name="to_world">
+            <lookat origin="278, 350, -300"
+                    target="278, 250, -100"
+                    up    ="  0,   1,    0"/>
+        </transform>
+        <ref id="sampler"/>
+        <ref id="film"/>
+    </sensor>
+
+
+    <bsdf type="diffuse" id="box">
+        <rgb name="reflectance" value="0.45, 0.30, 0.90"/>
+    </bsdf>
+
+    <bsdf type="diffuse" id="white">
+        <rgb name="reflectance" value="0.885809, 0.698859, 0.666422"/>
+    </bsdf>
+
+    <bsdf type="diffuse" id="red">
+        <rgb name="reflectance" value="0.570068, 0.0430135, 0.0443706"/>
+    </bsdf>
+
+    <bsdf type="diffuse" id="green">
+        <rgb name="reflectance" value="0.105421, 0.37798, 0.076425"/>
+    </bsdf>
+
+    <bsdf type="diffuse" id="light">
+        <rgb name="reflectance" value="0.936461, 0.740433, 0.705267"/>
+    </bsdf>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_luminaire.obj"/>
+        <transform name="to_world">
+            <translate x="0" y="-0.5" z="0"/>
+        </transform>
+
+        <ref id="light"/>
+
+        <emitter type="area">
+            <rgb name="radiance" value="18.387, 10.9873, 2.75357"/>
+        </emitter>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_floor.obj"/>
+
+        <ref id="white"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_ceiling.obj"/>
+
+        <ref id="white"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_back.obj"/>
+
+        <ref id="white"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_greenwall.obj"/>
+
+        <ref id="green"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_redwall.obj"/>
+
+        <ref id="red"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_smallbox.obj"/>
+        <ref id="box"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_largebox.obj"/>
+        <ref id="box"/>
+    </shape>
+</scene>
