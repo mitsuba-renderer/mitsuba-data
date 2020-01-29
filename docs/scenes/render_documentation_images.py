@@ -3,8 +3,12 @@ import glob
 import os
 import sys
 
-from mitsuba.scalar_rgb.core.xml import load_file
-from mitsuba.scalar_rgb.core import Thread, Bitmap, Struct
+import mitsuba
+
+mitsuba.set_variant("scalar_rgb")
+
+from mitsuba.core.xml import load_file
+from mitsuba.core import Thread, Bitmap, Struct
 
 
 def load_scene(filename, *args, **kwargs):
