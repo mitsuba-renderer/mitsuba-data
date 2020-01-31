@@ -1,0 +1,14 @@
+<scene version="0.6.0">
+
+    <shape type="obj">
+        <string name="filename" value="meshes/cbox_luminaire.obj"/>
+        <transform name="toWorld">
+            <translate x="0" y="-0.5" z="0"/>
+        </transform>
+        <ref id="light"/>
+        <emitter type="area" id="area-emitter">
+            <rgb name="radiance" value="18.387, 10.9873, 2.75357"/>
+        </emitter>
+    </shape>
+
+</scene>
