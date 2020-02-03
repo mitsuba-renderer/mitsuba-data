@@ -1,0 +1,180 @@
+<scene version='2.0.0'>
+
+    <default name="spp" value="64"/>
+
+    <integrator type='path'>
+        <integer name="max_depth" value="3"/>
+    </integrator>
+
+    <sensor type="perspective">
+        <float name="near_clip" value="1"/>
+        <float name="far_clip" value="1000"/>
+
+        <transform name="to_world">
+            <lookat target="0.0, 0.0, 0.0"
+                    origin="-24.0, 0.0, 0.0"
+                    up    ="0.0, 0.0, 1.0"/>
+        </transform>
+
+        <film type="hdrfilm">
+            <rfilter type="box"/>
+            <integer name="width" value="512"/>
+            <integer name="height" value="512"/>
+			<string name="pixel_format" value="rgb"/>
+        </film>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="$spp"/>
+        </sampler>
+    </sensor>
+
+    <emitter type="envmap">
+		<string name="filename" value="envmap.exr"/>
+	</emitter>
+
+
+    <!-- diffuse -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0.2 0.5 0.3"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="-6.0" z="0.0"/>
+        </transform>
+    </shape>
+
+    <!-- diffuse textured -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="diffuse">
+            <texture name="reflectance" type="bitmap">
+                <string name="filename" value="wood.jpg"/>
+            </texture>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="-3.0" z="0.0"/>
+        </transform>
+    </shape>
+
+    <!-- diamond -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="dielectric">
+                <string name="int_ior" value="diamond"/>
+                <string name="ext_ior" value="air"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="0.0" z="0.0"/>
+        </transform>
+    </shape>
+
+    <!-- plastic shiny -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="plastic">
+            <rgb name="diffuse_reflectance" value="0.1, 0.27, 0.36"/>
+            <float name="int_ior" value="1.9"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="3.0" z="0.0"/>
+        </transform>
+    </shape>
+
+    <!-- roughdielectric - beckman-->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="roughdielectric">
+            <string name="distribution" value="beckmann"/>
+            <float name="alpha" value="0.02"/>
+            <string name="int_ior" value="bk7"/>
+            <string name="ext_ior" value="air"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="6.0" z="0.0"/>
+        </transform>
+    </shape>
+
+    <!-- roughdielectric - ggx-->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="roughdielectric">
+            <string name="distribution" value="ggx"/>
+            <float name="alpha" value="0.1"/>
+            <string name="int_ior" value="bk7"/>
+            <string name="ext_ior" value="air"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="6.0" z="3.0"/>
+        </transform>
+    </shape>
+
+    <!-- roughplastic - beckmann-->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="roughplastic">
+            <string name="distribution" value="beckmann"/>
+            <float name="alpha" value="0.1"/>
+            <spectrum name="diffuse_reflectance" value="0"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="3.0" z="3.0"/>
+        </transform>
+    </shape>
+
+    <!-- roughplastic - brighter-->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="roughplastic">
+            <string name="distribution" value="beckmann"/>
+            <float name="alpha" value="0.05"/>
+            <spectrum name="diffuse_reflectance" value="0.5"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="0.0" z="3.0"/>
+        </transform>
+    </shape>
+
+    <!-- conductor -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="conductor">
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="-3.0" z="3.0"/>
+        </transform>
+    </shape>
+
+    <!-- roughconductor -->
+    <shape type="obj">
+        <string name="filename" value="sphere.obj"/>
+
+        <bsdf type="roughconductor">
+            <string name="distribution" value="beckmann"/>
+            <float name="alpha" value="0.05"/>
+        </bsdf>
+
+        <transform name="to_world">
+            <translate x="0.0" y="-6.0" z="3.0"/>
+        </transform>
+    </shape>
+
+</scene>
