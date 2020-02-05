@@ -28,14 +28,9 @@
         </sampler>
     </sensor>
 
-    <emitter type="envmap">
-		<string name="filename" value="textures/envmap.exr"/>
-	</emitter>
-
-
     <!-- diffuse -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="diffuse">
             <rgb name="reflectance" value="0.2 0.5 0.3"/>
@@ -48,7 +43,7 @@
 
     <!-- diffuse textured -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="diffuse">
             <texture name="reflectance" type="bitmap">
@@ -63,7 +58,7 @@
 
     <!-- diamond -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="dielectric">
                 <string name="int_ior" value="diamond"/>
@@ -77,7 +72,7 @@
 
     <!-- plastic shiny -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="plastic">
             <rgb name="diffuse_reflectance" value="0.1, 0.27, 0.36"/>
@@ -91,7 +86,7 @@
 
     <!-- roughdielectric - beckman-->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="roughdielectric">
             <string name="distribution" value="beckmann"/>
@@ -107,7 +102,7 @@
 
     <!-- roughdielectric - ggx-->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="roughdielectric">
             <string name="distribution" value="ggx"/>
@@ -123,7 +118,7 @@
 
     <!-- roughplastic - beckmann-->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="roughplastic">
             <string name="distribution" value="beckmann"/>
@@ -138,7 +133,7 @@
 
     <!-- roughplastic - brighter-->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="roughplastic">
             <string name="distribution" value="beckmann"/>
@@ -153,7 +148,7 @@
 
     <!-- conductor -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="conductor">
             <spectrum name="eta" value="0.789000"/>
@@ -167,7 +162,7 @@
 
     <!-- roughconductor -->
     <shape type="obj">
-        <string name="filename" value="sphere.obj"/>
+        <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="roughconductor">
             <string name="distribution" value="beckmann"/>
@@ -183,7 +178,7 @@
 
     <!-- twosided -->
     <shape type="obj">
-        <string name="filename" value="rectangle.obj"/>
+        <string name="filename" value="meshes/rectangle.obj"/>
 
         <bsdf type="mask">
             <texture name="opacity" type="bitmap">
@@ -206,7 +201,7 @@
 
     <!-- masked -->
     <shape type="obj">
-        <string name="filename" value="rectangle.obj"/>
+        <string name="filename" value="meshes/rectangle.obj"/>
 
         <bsdf type="mask">
             <texture name="opacity" type="bitmap">

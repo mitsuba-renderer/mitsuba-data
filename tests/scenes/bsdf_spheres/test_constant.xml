@@ -1,0 +1,7 @@
+<scene version='2.0.0'>
+
+    <emitter type="constant"/>
+
+    <include filename="include/scene.xml"/>
+
+</scene>
