@@ -156,6 +156,8 @@
         <string name="filename" value="sphere.obj"/>
 
         <bsdf type="conductor">
+            <spectrum name="eta" value="0.789000"/>
+            <spectrum name="k" value="6.150000"/>
         </bsdf>
 
         <transform name="to_world">
@@ -170,6 +172,8 @@
         <bsdf type="roughconductor">
             <string name="distribution" value="beckmann"/>
             <float name="alpha" value="0.05"/>
+            <spectrum name="eta" value="0.789000"/>
+            <spectrum name="k" value="6.150000"/>
         </bsdf>
 
         <transform name="to_world">

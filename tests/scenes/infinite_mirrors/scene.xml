@@ -36,7 +36,10 @@
     <shape type="obj">
         <string name="filename" value="sphere.obj"/>
 
-        <bsdf type="conductor"/>
+        <bsdf type="conductor">
+            <spectrum name="eta" value="0.789000"/>
+            <spectrum name="k" value="6.150000"/>
+        </bsdf>
 
         <transform name="to_world">
             <translate x="0.0" y="-1.05" z="-0.9"/>
@@ -46,7 +49,10 @@
     <shape type="obj">
         <string name="filename" value="sphere.obj"/>
 
-        <bsdf type="conductor"/>
+        <bsdf type="conductor">
+            <spectrum name="eta" value="0.789000"/>
+            <spectrum name="k" value="6.150000"/>
+        </bsdf>
 
         <transform name="to_world">
             <translate x="0.0" y="1.05" z="-0.9"/>
@@ -56,7 +62,10 @@
     <shape type="obj">
         <string name="filename" value="sphere.obj"/>
 
-        <bsdf type="conductor"/>
+        <bsdf type="conductor">
+            <spectrum name="eta" value="0.789000"/>
+            <spectrum name="k" value="6.150000"/>
+        </bsdf>
 
         <transform name="to_world">
             <translate x="0.0" y="0.0" z="0.9"/>
