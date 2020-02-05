@@ -5,7 +5,7 @@ import sys
 
 import mitsuba
 
-mitsuba.set_variant("scalar_rgb")
+mitsuba.set_variant("scalar_spectral")
 
 from mitsuba.core.xml import load_file
 from mitsuba.core import Thread, Bitmap, Struct

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<scene version="2.0.0">
+    <bsdf type="conductor" id="object_bsdf">
+        <spectrum name="eta" value="0.789000"/>
+        <spectrum name="k" value="6.150000"/>
+	</bsdf>
+    <include filename="include/matpreview.xml"/>
+</scene>
