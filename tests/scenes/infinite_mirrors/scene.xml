@@ -18,8 +18,8 @@
 
         <film type="hdrfilm">
             <rfilter type="box"/>
-            <integer name="width" value="512"/>
-            <integer name="height" value="512"/>
+            <integer name="width" value="128"/>
+            <integer name="height" value="128"/>
 			<string name="pixel_format" value="rgb"/>
         </film>
 
