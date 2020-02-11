@@ -9,7 +9,7 @@
         <float name="radius" value="0.5"/>
 		<transform name="to_world">
 			<rotate z="1" angle="225"/>
-			<translate x="0" y="0" z="0.5"/>
+			<translate x="0" y="0" z="0.2"/>
 		</transform>
         <ref id="object_bsdf"/>
     </shape>

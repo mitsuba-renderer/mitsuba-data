@@ -7,7 +7,6 @@
 
     <shape type="disk">
 		<transform name="to_world">
-			<rotate z="1" angle="225"/>
 			<translate x="0" y="0" z="1.0"/>
 		</transform>
         <ref id="object_bsdf"/>
