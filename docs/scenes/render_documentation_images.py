@@ -3,6 +3,7 @@ import glob
 import os
 import sys
 
+import numpy as np
 import mitsuba
 
 mitsuba.set_variant("scalar_spectral")
@@ -28,8 +29,28 @@ def render(scene, write_to):
     success = scene.integrator().render(scene, scene.sensors()[0])
     assert success
     film = scene.sensors()[0].film()
-    film.bitmap().convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
+    bitmap = film.bitmap(develop=True)
+    if bitmap.channel_count() == 4:
+        bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
+    else:
+        if bitmap.channel_count() > 7:
+            print('Unsupported number of AOV channels!')
+            return
 
+        data_np = np.array(bitmap, copy=False)[:, :, 4:]
+
+        # normalize depth map
+        if bitmap.channel_count() == 5:
+            min_val = np.min(data_np)
+            max_val = np.max(data_np)
+
+            data_np = (data_np - min_val) / (max_val - min_val)
+
+            bitmap = Bitmap(data_np, Bitmap.PixelFormat.Y)
+        else:
+            bitmap = Bitmap(data_np, Bitmap.PixelFormat.RGB)
+
+        bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
 
 def main(args):
     parser = argparse.ArgumentParser(prog='RenderDocImages')
