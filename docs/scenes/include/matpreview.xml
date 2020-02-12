@@ -32,8 +32,8 @@
 		</sampler>
 
 		<film type="hdrfilm" id="film">
-			<integer name="width" value="683"/>
-			<integer name="height" value="512"/>
+			<integer name="width" value="960"/>
+			<integer name="height" value="720"/>
 			<string name="pixel_format" value="rgb"/>
 			<rfilter type="gaussian"/>
 		</film>

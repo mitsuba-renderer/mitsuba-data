@@ -1,6 +1,6 @@
 <scene version="2.0.0">
 	<bsdf type="diffuse" id="object_bsdf">
-        <rgb name="reflectance" value="0.4 0.6 0.7"/>
+        <rgb name="reflectance" value="0.2, 0.25, 0.7"/>
     </bsdf>
 
     <shape type="sphere">

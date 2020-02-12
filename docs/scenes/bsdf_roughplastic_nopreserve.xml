@@ -3,7 +3,7 @@
 <scene version="2.0.0">
     <bsdf type="roughplastic" id="object_bsdf">
         <texture name="diffuse_reflectance" type="bitmap">
-            <string name="filename" value="textures/pattern_02.png"/>
+            <string name="filename" value="textures/pattern_02.jpg"/>
         </texture>
         <boolean name="nonlinear" value="true"/>
 	</bsdf>
