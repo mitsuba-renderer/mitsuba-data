@@ -29,7 +29,7 @@ def render(scene, write_to):
     success = scene.integrator().render(scene, scene.sensors()[0])
     assert success
     film = scene.sensors()[0].film()
-    bitmap = film.bitmap(develop=True)
+    bitmap = film.bitmap(raw=False)
     if bitmap.channel_count() == 4:
         bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
     else:
