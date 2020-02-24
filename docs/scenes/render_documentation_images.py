@@ -12,6 +12,8 @@ mode_override = {
     "bsdf_polarizer_absorbing": "scalar_spectral_polarized",
     "bsdf_polarizer_middle":    "scalar_spectral_polarized",
     "integrator_stokes_cbox":   "scalar_mono_polarized",
+    "variants_cbox_rgb":        "scalar_rgb",
+    "variants_cbox_spectral":   "scalar_spectral",
 }
 
 
@@ -36,8 +38,10 @@ def render(scene, write_to):
 
     success = scene.integrator().render(scene, scene.sensors()[0])
     assert success
+
     film = scene.sensors()[0].film()
     bitmap = film.bitmap(raw=False)
+
     if bitmap.channel_count() == 4:
         bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
     elif bitmap.channel_count() == 16:
@@ -87,13 +91,14 @@ def main(args):
     scenes = glob.glob(os.path.join(os.path.dirname(__file__), '*.xml'))
     for scene_path in scenes:
         scene_name = os.path.split(scene_path)[-1][:-4]
-        if scene_name in mode_override.keys():
-            mitsuba.set_variant(mode_override[scene_name])
-        else:
-            mitsuba.set_variant("scalar_spectral")
-
         img_path = os.path.join(images_folder, scene_name + ".jpg")
         if not os.path.isfile(img_path) or force:
+            print(scene_path)
+            if scene_name in mode_override.keys():
+                mitsuba.set_variant(mode_override[scene_name])
+            else:
+                mitsuba.set_variant("scalar_spectral")
+
             scene_path = os.path.abspath(scene_path)
             scene = load_scene(scene_path, parameters=[('spp', str(spp))])
             render(scene, img_path)
