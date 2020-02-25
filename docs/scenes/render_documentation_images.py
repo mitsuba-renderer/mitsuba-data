@@ -42,7 +42,7 @@ def render(scene, write_to):
     film = scene.sensors()[0].film()
     bitmap = film.bitmap(raw=False)
 
-    if bitmap.channel_count() == 4:
+    if not bitmap.pixel_format() == Bitmap.PixelFormat.MultiChannel:
         bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
     elif bitmap.channel_count() == 16:
         # Stokes output, rather specialized for 'integrator_stokes_cbox' scene atm.
@@ -57,24 +57,25 @@ def render(scene, write_to):
         Bitmap(s3).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s3.jpg'))
         Bitmap(s2).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s2.jpg'))
     else:
-        if bitmap.channel_count() > 7:
-            print('Unsupported number of AOV channels!')
-            return
+        for name, b in bitmap.split():
+            if name == '<root>':
+                continue
 
-        data_np = np.array(bitmap, copy=False)[:, :, 4:]
+            # normalize depth map
+            if name == 'depth.y':
+                data_np = np.array(b, copy=False)
+                min_val = np.min(data_np)
+                max_val = np.max(data_np)
+                data_np = (data_np - min_val) / (max_val - min_val)
+                b = Bitmap(data_np, Bitmap.PixelFormat.Y)
 
-        # normalize depth map
-        if bitmap.channel_count() == 5:
-            min_val = np.min(data_np)
-            max_val = np.max(data_np)
+            pixel_format = b.pixel_format()
+            if not pixel_format == Bitmap.PixelFormat.XYZ:
+                pixel_format = Bitmap.PixelFormat.RGB
 
-            data_np = (data_np - min_val) / (max_val - min_val)
+            f_name = write_to if name == 'image' else write_to.replace('.jpg', '_%s.jpg' % name)
+            b.convert(pixel_format, Struct.Type.UInt8, True).write(f_name)
 
-            bitmap = Bitmap(data_np, Bitmap.PixelFormat.Y)
-        else:
-            bitmap = Bitmap(data_np, Bitmap.PixelFormat.RGB)
-
-        bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
 
 def main(args):
     parser = argparse.ArgumentParser(prog='RenderDocImages')
