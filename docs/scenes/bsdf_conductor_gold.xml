@@ -2,8 +2,7 @@
 
 <scene version="2.0.0">
     <bsdf type="conductor" id="object_bsdf">
-        <spectrum name="eta" value="300:1.8, 400:1.65, 500:0.9, 600:0.2, 700:0.16, 800:0.18"/>
-        <spectrum name="k" value="300:1.92, 400:1.95, 500:1.95, 600:2.97, 700:3.8, 800:5.12"/>
+        <string name="material" value="Au"/>
 	</bsdf>
     <include filename="include/matpreview.xml"/>
 </scene>
