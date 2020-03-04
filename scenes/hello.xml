@@ -1,5 +1,4 @@
 <scene version='2.0.0'>
-
     <integrator type='direct'>
         <integer name="emitter_samples" value="4"/>
         <integer name="bsdf_samples" value="0"/>
@@ -31,7 +30,7 @@
                 value="../ply/teapot.ply"/>
 
         <bsdf type="diffuse">
-            <spectrum name="reflectance" value="400:0.0f, 500:1.0f, 600:10.0f, 700:0.0f"/>
+            <rgb name="reflectance" value="0.9 0.9 0.0"/>
         </bsdf>
 
         <transform name="to_world">
@@ -42,10 +41,11 @@
 
     <emitter type="point">
         <point name="position" x="2" y="-6.0" z="4.5"/>
-        <spectrum name="intensity" value="400:10.0f, 500:10.0f, 600:10.0f, 700:10.0f"/>
+        <rgb name="intensity" value="10.0"/>
     </emitter>
+
     <emitter type="point">
         <point name="position" x="-3" y="-3.0" z="-0.5"/>
-        <spectrum name="intensity" value="400:1.0f, 500:1.0f, 600:1.0f, 700:1.0f"/>
+        <rgb name="intensity" value="1.0"/>
     </emitter>
 </scene>
