@@ -101,7 +101,7 @@ def main(args):
                 mitsuba.set_variant("scalar_spectral")
 
             scene_path = os.path.abspath(scene_path)
-            scene = load_scene(scene_path, parameters=[('spp', str(spp))])
+            scene = load_scene(scene_path, spp=spp)
             render(scene, img_path)
 
 
