@@ -2,8 +2,10 @@
 
     <include filename="include/preamble.xml"/>
 
-    <integrator type='$volpathmis'>
-        <integer name="max_depth" value="6"/>
+    <integrator type='moment'>
+        <integrator type='$volpathmis'>
+            <integer name="max_depth" value="6"/>
+        </integrator>
     </integrator>
 
     <sensor type="perspective">
@@ -21,6 +23,7 @@
             <integer name="width" value="$res"/>
             <integer name="height" value="$res"/>
 			<string name="pixel_format" value="rgb"/>
+			<string name="component_format" value="float32"/>
             <!-- <integer name="crop_height" value="4"/>
             <integer name="crop_width" value="4"/>
             <integer name="crop_offset_x" value="16"/>

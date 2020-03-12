@@ -1,5 +1,4 @@
 <scene version='2.0.0'>
-
     <shape type="obj">
         <string name="filename" value="meshes/rectangle.obj"/>
         <transform name="to_world">
@@ -15,6 +14,5 @@
         </emitter>
     </shape>
 
-    <include filename="include/scene.xml"/>
-
+    <include filename="fragments/sphere_grid.xml"/>
 </scene>

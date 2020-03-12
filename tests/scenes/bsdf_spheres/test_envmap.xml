@@ -1,9 +1,7 @@
 <scene version='2.0.0'>
-
     <emitter type="envmap">
 		<string name="filename" value="textures/envmap.exr"/>
 	</emitter>
 
-    <include filename="include/scene.xml"/>
-
+    <include filename="fragments/sphere_grid.xml"/>
 </scene>

@@ -1,9 +1,10 @@
 <scene version='2.0.0'>
+    <default name="spp" value="128"/>
 
-    <default name="spp" value="4"/>
-
-    <integrator type='path'>
-        <integer name="max_depth" value="3"/>
+    <integrator type="moment">
+        <integrator type='path'>
+            <integer name="max_depth" value="2"/>
+        </integrator>
     </integrator>
 
     <sensor type="perspective">
@@ -18,9 +19,10 @@
 
         <film type="hdrfilm">
             <rfilter type="box"/>
-            <integer name="width" value="128"/>
-            <integer name="height" value="128"/>
+            <integer name="width" value="48"/>
+            <integer name="height" value="48"/>
 			<string name="pixel_format" value="rgb"/>
+			<string name="component_format" value="float32"/>
         </film>
 
         <sampler type="independent">
@@ -220,5 +222,4 @@
             <translate x="0.0" y="-3.0" z="-3.0"/>
         </transform>
     </shape>
-
 </scene>
