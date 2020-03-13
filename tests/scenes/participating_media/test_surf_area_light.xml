@@ -28,6 +28,10 @@
         <emitter type="area">
             <rgb name="radiance" value="18.387, 10.9873, 8.75357"/>
         </emitter>
+
+        <transform name="to_world">
+            <translate x="0.8" y="0.0" z="0.0"/>
+        </transform>
     </shape>
 
 </scene>
