@@ -1,6 +1,0 @@
-<scene version="0.6.0">
-    <include filename="mts1-fragments/base.xml"/>
-    <include filename="mts1-fragments/bsdfs-rgb.xml"/>
-    <include filename="mts1-fragments/emitters-rgb.xml"/>
-    <include filename="mts1-fragments/shapes.xml"/>
-</scene>
