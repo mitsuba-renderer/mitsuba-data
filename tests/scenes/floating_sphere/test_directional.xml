@@ -9,10 +9,10 @@
     <integrator type="moment">
         <integrator type="direct"/>
     </integrator>
-    
+
     <sensor type="perspective">
         <transform name="to_world">
-            <lookat origin="0,-5,1  " 
+            <lookat origin="0,-5,1  "
                     target="0, 0,.5"
                     up    ="0, 0,1  "/>
         </transform>
@@ -32,11 +32,13 @@
         <spectrum name="reflectance" value="1.0"/>
     </bsdf>
 
-    <shape type="rectangle">
+    <shape type="obj">
+        <string name="filename" value="meshes/rectangle.obj"/>
         <ref id="diffuse_bsdf"/>
     </shape>
 
-    <shape type="sphere">
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere.obj"/>
         <transform name="to_world">
             <scale value="0.1"/>
             <translate value="0,0,1"/>
