@@ -1,4 +1,6 @@
 <scene version='2.0.0'>
+    <path value="../../common"/>
+
     <integrator type='direct'>
         <integer name="emitter_samples" value="4"/>
         <integer name="bsdf_samples" value="0"/>
@@ -27,7 +29,7 @@
 
     <shape type="ply">
         <string name="filename"
-                value="../ply/teapot.ply"/>
+                value="meshes/teapot.ply"/>
 
         <bsdf type="diffuse">
             <rgb name="reflectance" value="0.9 0.9 0.0"/>

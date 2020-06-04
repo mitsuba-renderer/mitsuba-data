@@ -48,7 +48,7 @@
 
     <!-- envmap -->
     <emitter type="envmap">
-		<string name="filename" value="textures/envmap.exr"/>
+		<string name="filename" value="textures/museum.exr"/>
 	</emitter>
 
     <!-- point light -->

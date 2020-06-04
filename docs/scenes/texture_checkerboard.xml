@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <scene version="2.0.0">
+    <path value="../../common"/>
+
     <texture id="named_texture" type="checkerboard">
         <transform name="to_uv">
             <scale x="15" y="15"/>

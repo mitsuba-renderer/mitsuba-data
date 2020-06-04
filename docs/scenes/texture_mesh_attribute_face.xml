@@ -1,4 +1,6 @@
 <scene version="2.0.0">
+    <path value="../../common"/>
+
 	<bsdf type="twosided" id="object_bsdf">
         <bsdf type="diffuse">
             <texture type="mesh_attribute" name="reflectance">

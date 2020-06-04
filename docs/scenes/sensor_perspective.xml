@@ -1,4 +1,6 @@
 <scene version="2.0.0">
+    <path value="../../common"/>
+
 	<sensor type="perspective" id="Camera-camera">
 		<string name="fov_axis" value="smaller"/>
 		<float name="focus_distance" value="6.0"/>

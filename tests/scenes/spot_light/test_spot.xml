@@ -1,4 +1,6 @@
 <scene version="2.0.0">
+    <path value="../../../common"/>
+
     <default name="spp" value="32"/>
 
     <emitter id="light_0" type="constant">

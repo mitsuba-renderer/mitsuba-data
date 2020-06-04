@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <scene version="2.0.0">
+    <path value="../../common"/>
+
     <bsdf type="blendbsdf" id="object_bsdf">
         <texture name="weight" type="bitmap">
-            <string name="filename" value="textures/pattern.jpg"/>
+            <string name="filename" value="textures/noise_01.jpg"/>
         </texture>
 
         <bsdf type="roughplastic">

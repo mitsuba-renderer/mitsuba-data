@@ -1,7 +1,8 @@
 <scene version='2.0.0'>
+    <path value="../../common"/>
 
     <emitter type="envmap">
-		<string name="filename" value="textures/envmap.exr"/>
+		<string name="filename" value="textures/museum.exr"/>
 	</emitter>
 
     <include filename="include/test-scene-base.xml"/>

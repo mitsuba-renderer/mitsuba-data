@@ -18,7 +18,7 @@
 	</shape>
 
 	<emitter type="envmap" id="Area_002-light">
-		<string name="filename" value="textures/envmap.exr"/>
+		<string name="filename" value="textures/museum.exr"/>
 		<transform name="to_world">
 			<rotate y="1" angle="-180"/>
 			<matrix value="-0.224951 -0.000001 -0.974370 0.000000 -0.974370 0.000000 0.224951 0.000000 0.000000 1.000000 -0.000001 8.870000 0.000000 0.000000 0.000000 1.000000 "/>

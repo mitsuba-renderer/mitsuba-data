@@ -1,4 +1,6 @@
 <scene version='2.0.0'>
+    <path value="../../../common"/>
+
     <emitter type="point">
         <point name="position" x="-4" y="0.0" z="6.0"/>
         <spectrum name="intensity" value="300"/>

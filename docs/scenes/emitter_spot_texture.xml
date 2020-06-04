@@ -1,4 +1,6 @@
 <scene version="2.0.0">
+    <path value="../../common"/>
+
     <default name="spp" value="256"/>
 
     <integrator type="path"/>
@@ -31,7 +33,7 @@
         <spectrum name="intensity" value="200.0" />
         <float name="cutoff_angle" value="20" />
         <texture name="texture" type="bitmap">
-            <string name="filename" value="textures/pattern.jpg" />
+            <string name="filename" value="textures/noise_02.png" />
         </texture>
         <transform name="to_world">
             <lookat origin="3.0, 0.0, 5.0" target="0.0, 0.0, 0.0" up="-1, 0, 0" />

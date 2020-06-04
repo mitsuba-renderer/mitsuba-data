@@ -1,4 +1,6 @@
 <scene version='2.0.0'>
+    <path value="../../../common"/>
+
     <shape type="obj">
         <string name="filename" value="meshes/sphere.obj"/>
 

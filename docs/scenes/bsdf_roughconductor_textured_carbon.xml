@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <scene version="2.0.0">
+    <path value="../../common"/>
+
     <bsdf type="roughconductor" id="object_bsdf">
         <string name="distribution" value="beckmann"/>
         <texture name="alpha_u" type="checkerboard">
@@ -19,5 +19,6 @@
         </texture>
         <string name="material" value="a-C"/>
 	</bsdf>
+
     <include filename="include/matpreview.xml"/>
 </scene>

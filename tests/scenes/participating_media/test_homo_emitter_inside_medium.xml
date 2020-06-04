@@ -1,7 +1,8 @@
 <scene version='2.0.0'>
+    <path value="../../common"/>
 
     <emitter type="envmap">
-		<string name="filename" value="textures/envmap.exr"/>
+		<string name="filename" value="textures/museum.exr"/>
         <float name="scale" value="0.4"/>
 	</emitter>
 

@@ -70,7 +70,7 @@
 	</shape>
 
 	<shape type="obj">
-		<string name="filename" value="meshes/plate1.obj"/>
+		<string name="filename" value="meshes/veach/plate1.obj"/>
 
 		<bsdf type="roughplastic">
 			<rgb name="diffuse_reflectance" value="0.07 0.09 0.13"/>
@@ -81,7 +81,7 @@
 	</shape>
 
 	<shape type="obj">
-		<string name="filename" value="meshes/plate2.obj"/>
+		<string name="filename" value="meshes/veach/plate2.obj"/>
 
 		<bsdf type="roughplastic">
 			<rgb name="diffuse_reflectance" value="0.07 0.09 0.13"/>
@@ -92,7 +92,7 @@
 	</shape>
 
 	<shape type="obj">
-		<string name="filename" value="meshes/plate3.obj"/>
+		<string name="filename" value="meshes/veach/plate3.obj"/>
 
 		<bsdf type="roughplastic">
 			<rgb name="diffuse_reflectance" value="0.07 0.09 0.13"/>
@@ -103,7 +103,7 @@
 	</shape>
 
 	<shape type="obj">
-		<string name="filename" value="meshes/plate4.obj"/>
+		<string name="filename" value="meshes/veach/plate4.obj"/>
 
 		<bsdf type="roughplastic">
 			<rgb name="diffuse_reflectance" value="0.07 0.09 0.13"/>
@@ -114,7 +114,7 @@
 	</shape>
 
 	<shape type="obj">
-		<string name="filename" value="meshes/floor.obj"/>
+		<string name="filename" value="meshes/veach/floor.obj"/>
 
 		<bsdf type="diffuse">
 			<rgb name="reflectance" value="0.4 0.4 0.4"/>

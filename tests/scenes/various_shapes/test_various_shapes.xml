@@ -1,4 +1,5 @@
 <scene version='2.0.0'>
+
     <default name="spp" value="16"/>
 
     <integrator type="moment">
@@ -83,7 +84,7 @@
     </shape>
 
     <shape type="serialized">
-        <string name="filename" value="meshes/rectangle_normals_uv.serialized"/>
+        <string name="filename" value="../../serialized/rectangle_normals_uv.serialized"/>
         <ref id="object_bsdf"/>
         <transform name="to_world">
             <scale x="-0.5" y="-0.5" z="-0.5"/>
@@ -94,7 +95,7 @@
     </shape>
 
     <shape type="obj">
-        <string name="filename" value="meshes/rectangle_normals_uv.obj"/>
+        <string name="filename" value="../../obj/rectangle_normals_uv.obj"/>
         <ref id="object_bsdf"/>
         <transform name="to_world">
             <scale x="-0.5" y="-0.5" z="-0.5"/>
@@ -105,7 +106,7 @@
     </shape>
 
     <shape type="ply">
-        <string name="filename" value="meshes/rectangle_normals_uv.ply"/>
+        <string name="filename" value="../../ply/rectangle_normals_uv.ply"/>
         <ref id="object_bsdf"/>
         <transform name="to_world">
             <scale x="-0.5" y="-0.5" z="-0.5"/>

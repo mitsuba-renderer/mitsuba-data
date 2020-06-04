@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <scene version="2.0.0">
+    <path value="../../common"/>
+
     <shape type="rectangle">
         <transform name="to_world">
             <scale x="0.8" y="0.8" z="0.8"/>
