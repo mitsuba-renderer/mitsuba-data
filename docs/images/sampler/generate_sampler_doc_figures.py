@@ -13,8 +13,8 @@ mitsuba.set_variant("scalar_rgb")
 
 from mitsuba.core import xml
 
-def plot_samples(sampler, filename):
-
+def plot_samples(sampler_dict, filename, grid_on=True, proj_1d=True):
+    sampler = xml.load_dict(sampler_dict)
     sample_count = sampler.sample_count()
 
     sampler.seed(0)
@@ -26,77 +26,212 @@ def plot_samples(sampler, filename):
     xx = [samples[s][0] for s in range(sample_count)]
     yy = [samples[s][1] for s in range(sample_count)]
 
-    fig, axes = plt.subplots(nrows=2, ncols=2,
-                             figsize=(10, 10),
-                             gridspec_kw=dict(width_ratios=[0.9, 0.1], height_ratios=[0.1, 0.9]))
-    plt.subplots_adjust(wspace=0.05, hspace=0.05)
+    # Plot 1D projections
+    if proj_1d:
+        fig, axes = plt.subplots(nrows=2, ncols=2,
+                                 figsize=(11, 11),
+                                 gridspec_kw=dict(width_ratios=[0.98, 0.02], height_ratios=[0.02, 0.98]))
+        plt.subplots_adjust(wspace=0.05, hspace=0.05)
 
-    # Plot 2D samples
+        # Plot 2D samples
 
-    axes[1][0].scatter(xx, yy)
-    axes[1][0].set_xlim([0.0, 1.0])
-    axes[1][0].set_ylim([0.0, 1.0])
+        axes[1][0].scatter(xx, yy)
+        axes[1][0].set_xlim([0.0, 1.0])
+        axes[1][0].set_ylim([0.0, 1.0])
 
-    axes[1][0].xaxis.set_major_locator(MultipleLocator(0.2))
-    axes[1][0].xaxis.set_minor_locator(MultipleLocator(0.02))
-    axes[1][0].yaxis.set_major_locator(MultipleLocator(0.2))
-    axes[1][0].yaxis.set_minor_locator(MultipleLocator(0.02))
+        axes[1][0].xaxis.set_major_locator(MultipleLocator(0.2))
+        axes[1][0].yaxis.set_major_locator(MultipleLocator(0.2))
 
-    # Plot 1D projections on Y axis
+        if grid_on:
+            grid_delta = 1.0 / np.sqrt(sample_count)
+            axes[1][0].xaxis.set_minor_locator(MultipleLocator(grid_delta))
+            axes[1][0].yaxis.set_minor_locator(MultipleLocator(grid_delta))
+            axes[1][0].grid(b=True, which='minor', alpha=0.3)
+        else:
+            axes[1][0].xaxis.set_minor_locator(MultipleLocator(0.02))
+            axes[1][0].yaxis.set_minor_locator(MultipleLocator(0.02))
 
-    axes[1][1].vlines(0.0, 0.0, 1.0)
-    proj = yy #random.sample(yy, 512)
-    axes[1][1].plot(np.zeros(np.shape(proj)), proj, '_', ms=20)
+        # Plot 1D projections on Y axis
 
-    axes[1][1].set_xlim(0.0, 1.0)
-    axes[1][1].set_ylim(0.0, 1.0)
-    axes[1][1].axis('off')
+        axes[1][1].vlines(0.0, 0.0, 1.0)
+        proj = yy #random.sample(yy, 512)
+        axes[1][1].plot(np.zeros(np.shape(proj)), proj, '_', ms=20)
 
-    # Plot 1D projections on X axis
+        axes[1][1].set_xlim(0.0, 1.0)
+        axes[1][1].set_ylim(0.0, 1.0)
+        axes[1][1].axis('off')
 
-    axes[0][0].hlines(0.0, 0.0, 1)
-    proj = xx #random.sample(xx, 512)
-    axes[0][0].plot(proj, np.zeros(np.shape(proj)), '|', ms=20)
+        # Plot 1D projections on X axis
 
-    axes[0][0].set_xlim(0.0, 1.0)
-    axes[0][0].set_ylim(0.0, 1.0)
-    axes[0][0].axis('off')
+        axes[0][0].hlines(0.0, 0.0, 1)
+        proj = xx #random.sample(xx, 512)
+        axes[0][0].plot(proj, np.zeros(np.shape(proj)), '|', ms=20)
 
-    # Make the 4th plot invisible
+        axes[0][0].set_xlim(0.0, 1.0)
+        axes[0][0].set_ylim(0.0, 1.0)
+        axes[0][0].axis('off')
 
-    axes[0][1].axis('off')
+        # Make the 4th plot invisible
 
-    fig.savefig("%s.svg" % filename)
+        axes[0][1].axis('off')
+    else:
+        fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10, 10))
+
+        # Plot 2D samples
+        ax.scatter(xx, yy)
+        ax.set_xlim([0.0, 1.0])
+        ax.set_ylim([0.0, 1.0])
+
+        ax.xaxis.set_major_locator(MultipleLocator(0.2))
+        ax.xaxis.set_minor_locator(MultipleLocator(0.02))
+        ax.yaxis.set_major_locator(MultipleLocator(0.2))
+        ax.yaxis.set_minor_locator(MultipleLocator(0.02))
+
+    fig.savefig(filename)
 
 
-sample_count = 1024
-sampler_dicts = {
-    "independent" : {
+####################################
+# independent sampler
+
+plot_samples(
+    sampler_dict={
         "type" : "independent",
-        "sample_count" : sample_count,
+        "sample_count" : 64,
     },
-    "stratified" : {
-        "type" : "stratified",
-        "sample_count" : sample_count,
-    },
-    "multijitter" : {
-        "type" : "multijitter",
-        "sample_count" : sample_count,
-    },
-    "ldsampler" : {
-        "type" : "ldsampler",
-        "sample_count" : sample_count,
-    },
-    "bose" : {
-        "type" : "bose",
-        "sample_count" : sample_count,
-    },
-    "bush" : {
-        "type" : "bush",
-        "sample_count" : sample_count,
-    },
-}
+    filename="independent_64_samples_and_proj.svg",
+    grid_on=False,
+    proj_1d=True
+)
 
-for name, sampler_dict in sampler_dicts.items():
-    sampler = xml.load_dict(sampler_dict)
-    plot_samples(sampler, "%s_samples" % name)
+plot_samples(
+    sampler_dict={
+        "type" : "independent",
+        "sample_count" : 1024,
+    },
+    filename="independent_1024_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
+
+
+####################################
+# stratified sampler
+
+plot_samples(
+    sampler_dict={
+        "type" : "stratified",
+        "sample_count" : 64,
+        "jitter" : True,
+    },
+    filename="stratified_64_samples_and_proj.svg",
+    grid_on=True,
+    proj_1d=True
+)
+
+plot_samples(
+    sampler_dict={
+        "type" : "stratified",
+        "sample_count" : 1024,
+    },
+    filename="stratified_1024_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
+
+
+####################################
+# multijitter sampler
+
+plot_samples(
+    sampler_dict={
+        "type" : "multijitter",
+        "sample_count" : 64,
+        "jitter" : True,
+    },
+    filename="multijitter_64_samples_and_proj.svg",
+    grid_on=True,
+    proj_1d=True
+)
+
+plot_samples(
+    sampler_dict={
+        "type" : "multijitter",
+        "sample_count" : 1024,
+    },
+    filename="multijitter_1024_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
+
+
+####################################
+# bose sampler
+
+plot_samples(
+    sampler_dict={
+        "type" : "bose",
+        "sample_count" : 49,
+        "jitter" : True,
+    },
+    filename="bose_49_samples_and_proj.svg",
+    grid_on=True,
+    proj_1d=True
+)
+
+plot_samples(
+    sampler_dict={
+        "type" : "bose",
+        "sample_count" : 1369,
+    },
+    filename="bose_1369_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
+
+####################################
+# bush sampler
+
+plot_samples(
+    sampler_dict={
+        "type" : "bush",
+        "sample_count" : 49,
+        "jitter" : True,
+    },
+    filename="bush_49_samples_and_proj.svg",
+    grid_on=True,
+    proj_1d=True
+)
+
+plot_samples(
+    sampler_dict={
+        "type" : "bush",
+        "sample_count" : 1369,
+    },
+    filename="bush_1369_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
+
+
+####################################
+# ldsampler sampler
+
+plot_samples(
+    sampler_dict={
+        "type" : "ldsampler",
+        "sample_count" : 64,
+    },
+    filename="ldsampler_64_samples_and_proj.svg",
+    grid_on=True,
+    proj_1d=True
+)
+
+plot_samples(
+    sampler_dict={
+        "type" : "ldsampler",
+        "sample_count" : 1024,
+    },
+    filename="ldsampler_1024_samples.svg",
+    grid_on=False,
+    proj_1d=False
+)
