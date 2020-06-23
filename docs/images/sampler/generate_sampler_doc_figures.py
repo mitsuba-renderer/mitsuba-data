@@ -165,53 +165,28 @@ plot_samples(
 
 
 ####################################
-# bose sampler
+# orthogonal sampler
 
 plot_samples(
     sampler_dict={
-        "type" : "bose",
+        "type" : "orthogonal",
         "sample_count" : 49,
         "jitter" : True,
     },
-    filename="bose_49_samples_and_proj.svg",
+    filename="orthogonal_49_samples_and_proj.svg",
     grid_on=True,
     proj_1d=True
 )
 
 plot_samples(
     sampler_dict={
-        "type" : "bose",
+        "type" : "orthogonal",
         "sample_count" : 1369,
     },
-    filename="bose_1369_samples.svg",
+    filename="orthogonal_1369_samples.svg",
     grid_on=False,
     proj_1d=False
 )
-
-####################################
-# bush sampler
-
-plot_samples(
-    sampler_dict={
-        "type" : "bush",
-        "sample_count" : 49,
-        "jitter" : True,
-    },
-    filename="bush_49_samples_and_proj.svg",
-    grid_on=True,
-    proj_1d=True
-)
-
-plot_samples(
-    sampler_dict={
-        "type" : "bush",
-        "sample_count" : 1369,
-    },
-    filename="bush_1369_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
-
 
 ####################################
 # ldsampler sampler

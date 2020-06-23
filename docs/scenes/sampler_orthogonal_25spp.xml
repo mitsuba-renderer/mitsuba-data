@@ -1,5 +1,5 @@
 <scene version="2.1.0">
-    <sampler type="bush" id="my_sampler">
+    <sampler type="orthogonal" id="my_sampler">
         <integer name="sample_count" value="25"/>
     </sampler>
 

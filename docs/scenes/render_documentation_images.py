@@ -98,7 +98,7 @@ def main(args):
             if scene_name in mode_override.keys():
                 mitsuba.set_variant(mode_override[scene_name])
             else:
-                mitsuba.set_variant("scalar_spectral")
+                mitsuba.set_variant("scalar_rgb")
 
             scene_path = os.path.abspath(scene_path)
             scene = load_scene(scene_path, spp=spp)
