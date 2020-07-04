@@ -7,7 +7,7 @@
     <include filename="include/test-scene-base-no-bg.xml"/>
 
     <medium id="medium1" type="homogeneous">
-        <float name="density" value="0.5"/>
+        <float name="scale" value="0.5"/>
         <rgb name="sigma_t" value="1, 1, 1"/>
         <rgb name="albedo" value="0.99, 0.7, 0.99"/>
         <phase type="isotropic" />

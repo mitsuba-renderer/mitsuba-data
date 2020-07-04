@@ -7,7 +7,7 @@
     <include filename="include/test-scene-base.xml"/>
 
     <medium id="medium1" type="heterogeneous">
-        <float name="density_scale" value="2"/>
+        <float name="scale" value="2"/>
 
         <rgb name="albedo" value="0.99, 0.99, 0.99"/>
 

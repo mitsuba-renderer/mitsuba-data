@@ -7,7 +7,7 @@
     <include filename="include/test-scene-base.xml"/>
 
     <medium id="medium1" type="heterogeneous">
-        <float name="density_scale" value="5"/>
+        <float name="scale" value="5"/>
 
         <volume name="sigma_t" type="gridvolume">
             <transform name="to_world">
