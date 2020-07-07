@@ -38,8 +38,7 @@
         </film>
     </sensor>
 
-    <shape type="obj">
-        <string name="filename" value="meshes/rectangle.obj"/>
+    <shape type="rectangle">
         <bsdf id="diffuse_bsdf" type="diffuse">
             <spectrum name="reflectance" value="1.0"/>
         </bsdf>

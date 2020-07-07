@@ -1,5 +1,5 @@
 <scene version='2.0.0'>
-    <path value="../../common"/>
+    <path value="../../../common"/>
 
     <include filename="include/test-scene-base.xml"/>
 

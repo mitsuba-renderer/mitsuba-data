@@ -1,4 +1,5 @@
 <scene version="2.1.0">
+    <path value="../../../common"/>
 
     <default name="spp" value="4"/>
 
@@ -41,7 +42,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="repeat"/>
                 <string name="filter_type" value="bilinear"/>
             </texture>
@@ -59,7 +60,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="mirror"/>
                 <string name="filter_type" value="bilinear"/>
             </texture>
@@ -77,7 +78,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="clamp"/>
                 <string name="filter_type" value="bilinear"/>
             </texture>
@@ -95,7 +96,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="repeat"/>
                 <string name="filter_type" value="nearest"/>
             </texture>
@@ -113,7 +114,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="mirror"/>
                 <string name="filter_type" value="nearest"/>
             </texture>
@@ -131,7 +132,7 @@
                     <scale value="2"/>
                     <translate value="-.5,-.5, 0"/>
                 </transform>
-                <string name="filename" value="carrot.png"/>
+                <string name="filename" value="textures/carrot.png"/>
                 <string name="wrap_mode" value="clamp"/>
                 <string name="filter_type" value="nearest"/>
             </texture>

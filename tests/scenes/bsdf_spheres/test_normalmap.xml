@@ -1,4 +1,4 @@
-<scene version='2.0.0'>
+<scene version='2.1.0'>
     <path value="../../../common"/>
 
     <shape type="obj">
@@ -9,11 +9,7 @@
                 <boolean name="raw" value="true"/>
                 <string name="filename" value="textures/floor_tiles_normalmap.jpg"/>
             </texture>
-            <bsdf type="roughplastic">
-                <texture name="diffuse_reflectance" type="bitmap">
-                    <string name="filename" value="textures/floor_tiles.jpg"/>
-                </texture>
-            </bsdf>
+            <bsdf type="diffuse"/>
         </bsdf>
     </shape>
 
