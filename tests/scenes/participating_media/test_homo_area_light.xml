@@ -10,7 +10,7 @@
         <phase type="isotropic" />
     </medium>
     <shape type="obj">
-        <string name="filename" value="meshes/sphere.obj"/>
+        <string name="filename" value="meshes/sphere_tiny.obj"/>
         <bsdf type="null">
         </bsdf>
         <ref id="medium1" name="interior"/>

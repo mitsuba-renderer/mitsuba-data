@@ -14,7 +14,7 @@
         <phase type="isotropic" />
     </medium>
     <shape type="obj">
-        <string name="filename" value="meshes/sphere.obj"/>
+        <string name="filename" value="meshes/sphere_tiny.obj"/>
         <bsdf type="thindielectric">
             <string name="int_ior" value="water" />
             <string name="ext_ior" value="air" />
