@@ -1,4 +1,5 @@
 <scene version="2.1.0">
+    <path value="../../common"/>
 	<!-- <default name="spp" value="16"/> -->
 
     <sampler type="independent" id="my_sampler">

@@ -95,123 +95,146 @@ def plot_samples(sampler_dict, filename, grid_on=True, proj_1d=True, dim_offset=
     fig.savefig(filename)
 
 
-####################################
-# independent sampler
+if __name__ == '__main__':
+    ####################################
+    # independent sampler
 
-plot_samples(
-    sampler_dict={
-        "type" : "independent",
-        "sample_count" : 64,
-    },
-    filename="independent_64_samples_and_proj.svg",
-    grid_on=False,
-    proj_1d=True
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "independent",
+            "sample_count" : 64,
+        },
+        filename="independent_64_samples_and_proj.svg",
+        grid_on=False,
+        proj_1d=True
+    )
 
-plot_samples(
-    sampler_dict={
-        "type" : "independent",
-        "sample_count" : 1024,
-    },
-    filename="independent_1024_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
-
-
-####################################
-# stratified sampler
-
-plot_samples(
-    sampler_dict={
-        "type" : "stratified",
-        "sample_count" : 64,
-        "jitter" : True,
-    },
-    filename="stratified_64_samples_and_proj.svg",
-    grid_on=True,
-    proj_1d=True
-)
-
-plot_samples(
-    sampler_dict={
-        "type" : "stratified",
-        "sample_count" : 1024,
-    },
-    filename="stratified_1024_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "independent",
+            "sample_count" : 1024,
+        },
+        filename="independent_1024_samples.svg",
+        grid_on=False,
+        proj_1d=False
+    )
 
 
-####################################
-# multijitter sampler
+    ####################################
+    # stratified sampler
 
-plot_samples(
-    sampler_dict={
-        "type" : "multijitter",
-        "sample_count" : 64,
-        "jitter" : True,
-    },
-    filename="multijitter_64_samples_and_proj.svg",
-    grid_on=True,
-    proj_1d=True
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "stratified",
+            "sample_count" : 64,
+            "jitter" : True,
+        },
+        filename="stratified_64_samples_and_proj.svg",
+        grid_on=True,
+        proj_1d=True
+    )
 
-plot_samples(
-    sampler_dict={
-        "type" : "multijitter",
-        "sample_count" : 1024,
-    },
-    filename="multijitter_1024_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "stratified",
+            "sample_count" : 1024,
+        },
+        filename="stratified_1024_samples.svg",
+        grid_on=False,
+        proj_1d=False
+    )
 
 
-####################################
-# orthogonal sampler
+    ####################################
+    # multijitter sampler
 
-plot_samples(
-    sampler_dict={
-        "type" : "orthogonal",
-        "sample_count" : 49,
-        "jitter" : True,
-    },
-    filename="orthogonal_49_samples_and_proj.svg",
-    grid_on=True,
-    proj_1d=True
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "multijitter",
+            "sample_count" : 64,
+            "jitter" : True,
+        },
+        filename="multijitter_64_samples_and_proj.svg",
+        grid_on=True,
+        proj_1d=True
+    )
 
-plot_samples(
-    sampler_dict={
-        "type" : "orthogonal",
-        "sample_count" : 1369,
-    },
-    filename="orthogonal_1369_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "multijitter",
+            "sample_count" : 1024,
+        },
+        filename="multijitter_1024_samples.svg",
+        grid_on=False,
+        proj_1d=False
+    )
 
-####################################
-# ldsampler sampler
 
-plot_samples(
-    sampler_dict={
-        "type" : "ldsampler",
-        "sample_count" : 64,
-    },
-    filename="ldsampler_64_samples_and_proj.svg",
-    grid_on=True,
-    proj_1d=True
-)
+    ####################################
+    # orthogonal sampler
 
-plot_samples(
-    sampler_dict={
-        "type" : "ldsampler",
-        "sample_count" : 1024,
-    },
-    filename="ldsampler_1024_samples.svg",
-    grid_on=False,
-    proj_1d=False
-)
+    plot_samples(
+        sampler_dict={
+            "type" : "orthogonal",
+            "sample_count" : 49,
+            "jitter" : True,
+        },
+        filename="orthogonal_49_samples_and_proj.svg",
+        grid_on=True,
+        proj_1d=True
+    )
+
+    plot_samples(
+        sampler_dict={
+            "type" : "orthogonal",
+            "sample_count" : 1369,
+        },
+        filename="orthogonal_1369_samples.svg",
+        grid_on=False,
+        proj_1d=False
+    )
+
+    ####################################
+    # ldsampler sampler
+
+    plot_samples(
+        sampler_dict={
+            "type" : "ldsampler",
+            "sample_count" : 64,
+        },
+        filename="ldsampler_64_samples_and_proj.svg",
+        grid_on=True,
+        proj_1d=True
+    )
+
+    plot_samples(
+        sampler_dict={
+            "type" : "ldsampler",
+            "sample_count" : 1024,
+        },
+        filename="ldsampler_1024_samples.svg",
+        grid_on=False,
+        proj_1d=False
+    )
+
+    plot_samples(
+        sampler_dict={
+            "type" : "ldsampler",
+            "sample_count" : 64,
+        },
+        filename="ldsampler_64_samples_and_proj_dim_32.svg",
+        grid_on=True,
+        proj_1d=True,
+        dim_offset=2
+    )
+
+    plot_samples(
+        sampler_dict={
+            "type" : "ldsampler",
+            "sample_count" : 1024,
+        },
+        filename="ldsampler_1024_samples_dim_32.svg",
+        grid_on=False,
+        proj_1d=False,
+        dim_offset=2
+    )
