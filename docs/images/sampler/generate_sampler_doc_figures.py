@@ -13,15 +13,20 @@ mitsuba.set_variant("scalar_rgb")
 
 from mitsuba.core import xml
 
-def plot_samples(sampler_dict, filename, grid_on=True, proj_1d=True):
+def plot_samples(sampler_dict, filename, grid_on=True, proj_1d=True, dim_offset=0):
     sampler = xml.load_dict(sampler_dict)
     sample_count = sampler.sample_count()
 
     sampler.seed(0)
     samples = []
     for s in range(sample_count):
-        sampler.prepare_wavefront()
+        # Move to the requested dimensions in the sequence
+        for i in range(dim_offset):
+            sampler.next_1d()
+
         samples.append(sampler.next_2d())
+
+        sampler.advance()
 
     xx = [samples[s][0] for s in range(sample_count)]
     yy = [samples[s][1] for s in range(sample_count)]
