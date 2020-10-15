@@ -1,8 +1,10 @@
 <scene version="2.0.0">
     <default name="spp" value="512"/>
-    <default name="max_depth" value="3"/>
-    <default name="res" value="720"/>
+    <default name="max_depth" value="6"/>
+    <default name="resx" value="720"/>
+    <default name="resy" value="720"/>
 
+    <!-- <integrator type="direct"/> -->
     <integrator type="path">
         <integer name="max_depth" value="$max_depth"/>
     </integrator>
@@ -25,14 +27,14 @@
             <integer name="sample_count" value="$spp"/>
         </sampler>
         <film type="hdrfilm">
-            <integer name="width" value="$res"/>
-            <integer name="height" value="$res"/>
+            <integer name="width" value="$resx"/>
+            <integer name="height" value="$resy"/>
             <rfilter type="box"/>
             <string  name="pixel_format" value="rgb"/>
         </film>
     </sensor>
 
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_luminaire">
         <string name="filename" value="meshes/cbox_luminaire.obj"/>
         <transform name="to_world">
             <translate x="0" y="-0.5" z="0"/>
@@ -46,73 +48,55 @@
         </emitter>
     </shape>
 
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_floor">
         <string name="filename" value="meshes/cbox_floor.obj"/>
         <bsdf type="diffuse" id="white_floor">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0.25, 0.25, 0.25"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_ceiling">
         <string name="filename" value="meshes/cbox_ceiling.obj"/>
         <bsdf type="diffuse" id="white_ceiling">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_back">
         <string name="filename" value="meshes/cbox_back.obj"/>
         <bsdf type="diffuse" id="white_back">
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0, 0.75, 0.75"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_green">
         <string name="filename" value="meshes/cbox_greenwall.obj"/>
         <bsdf type="diffuse" id="green">
             <rgb name="reflectance" value = "0.105421, 0.37798, 0.076425"/>
-            <!-- <rgb name="reflectance" value = "0.25, 1, 0"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_red">
         <string name="filename" value="meshes/cbox_redwall.obj"/>
         <bsdf type="diffuse" id="red">
             <rgb name="reflectance" value = "0.570068, 0.0430135, 0.0443706"/>
-            <!-- <rgb name="reflectance" value = "0.5, 0, 0.25"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_small_box">
         <string name="filename" value="meshes/cbox_smallbox.obj"/>
         <bsdf type="diffuse" id="white_small_box">
             <!-- <texture type="bitmap" name="reflectance">
                 <string name="filename" value="color-grid.exr"/>
             </texture> -->
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0, 0.25, 0.5"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
-    <shape type="obj">
+    <shape type="obj" id="mesh_white_large_box">
         <string name="filename" value="meshes/cbox_largebox.obj"/>
         <bsdf type="diffuse" id="white_large_box">
             <!-- <texture type="bitmap" name="reflectance">
                 <string name="filename" value="color-grid.exr"/>
             </texture> -->
             <rgb name="reflectance" value = "0.885809, 0.698859, 0.666422"/>
-            <!-- <rgb name="reflectance" value = "0.25, 0.5, 0.75"/> -->
-            <!-- <rgb name="reflectance" value = "1.0, 0.8, 0.6"/> -->
-            <!-- <rgb name="reflectance" value = "0.5, 0.5, 0.5"/> -->
         </bsdf>
     </shape>
+
+    <!-- TODO: remove this -->
+    <emitter type="constant"/>
 </scene>
