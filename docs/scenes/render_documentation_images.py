@@ -14,8 +14,20 @@ mode_override = {
     "integrator_stokes_cbox":   "scalar_mono_polarized",
     "variants_cbox_rgb":        "scalar_rgb",
     "variants_cbox_spectral":   "scalar_spectral",
+    "bsdf_measured_polarized_gold": "scalar_spectral_polarized",
+    "bsdf_measured_polarized_gold_stokes": "scalar_spectral_polarized",
+    "bsdf_measured_polarized_fakegold": "scalar_spectral_polarized",
+    "bsdf_measured_polarized_fakegold_stokes": "scalar_spectral_polarized",
 }
 
+# These renderings rely on external data that is too large to be part of the git repository.
+# See the concrete .xml scene files for download links in case these need to be re-generated.
+skip = [
+    "bsdf_measured_polarized_gold",
+    "bsdf_measured_polarized_gold_stokes",
+    "bsdf_measured_polarized_fakegold",
+    "bsdf_measured_polarized_fakegold_stokes",
+]
 
 def load_scene(filename, *args, **kwargs):
     """Prepares the file resolver and loads a Mitsuba scene from the given path."""
@@ -93,7 +105,7 @@ def main(args):
     for scene_path in scenes:
         scene_name = os.path.split(scene_path)[-1][:-4]
         img_path = os.path.join(images_folder, scene_name + ".jpg")
-        if not os.path.isfile(img_path) or force:
+        if (not os.path.isfile(img_path) or force) and (not scene_name in skip):
             print(scene_path)
             if scene_name in mode_override.keys():
                 mitsuba.set_variant(mode_override[scene_name])
