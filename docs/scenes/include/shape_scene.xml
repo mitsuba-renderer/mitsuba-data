@@ -1,6 +1,13 @@
 <scene version="2.0.0">
 	<default name="spp" value="64"/>
-	<integrator type="path" />
+	<default name="integrator" value="path"/>
+	<default name="rr_depth" value="5"/>
+	<default name="max_depth" value="-1"/>
+
+	<integrator type="$integrator">
+		<integer name="rr_depth" value="$rr_depth"/>
+		<integer name="max_depth" value="$max_depth"/>
+	</integrator>
 
 	<sensor type="perspective" id="Camera-camera">
 		<string name="fov_axis" value="smaller"/>
