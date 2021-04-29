@@ -18,6 +18,12 @@ mode_override = {
     "bsdf_measured_polarized_gold_stokes": "scalar_spectral_polarized",
     "bsdf_measured_polarized_fakegold": "scalar_spectral_polarized",
     "bsdf_measured_polarized_fakegold_stokes": "scalar_spectral_polarized",
+    "bsdf_pplastic": "scalar_spectral_polarized",
+    "bsdf_pplastic_stokes": "scalar_spectral_polarized",
+    "bsdf_pplastic_diffuse": "scalar_spectral_polarized",
+    "bsdf_pplastic_diffuse_stokes": "scalar_spectral_polarized",
+    "bsdf_pplastic_specular": "scalar_spectral_polarized",
+    "bsdf_pplastic_specular_stokes": "scalar_spectral_polarized",
 }
 
 # These renderings rely on external data that is too large to be part of the git repository.
