@@ -7,7 +7,13 @@
     <default name="integrator" value="ptracer"/>
     <default name="max_depth" value="4"/>
 
-
+    <!-- NOTE: since the particle tracer does not support AOVs, enable this
+         integrator instead when generating reference images for test_renders.py -->
+    <!-- <integrator type="moment">
+        <integrator type="path">
+            <integer name="max_depth" value="$max_depth"/>
+        </integrator>
+    </integrator> -->
     <integrator type="$integrator">
         <integer name="max_depth" value="$max_depth"/>
     </integrator>
