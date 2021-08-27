@@ -54,7 +54,7 @@ def load_scene(filename, *args, **kwargs):
 def render(scene, write_to):
     from mitsuba.core import Bitmap, Struct
 
-    success = scene.integrator().render(scene, scene.sensors()[0])
+    success = scene.integrator().render(scene, 0, scene.sensors()[0])
     assert success
 
     film = scene.sensors()[0].film()
