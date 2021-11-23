@@ -11,10 +11,10 @@ from matplotlib.ticker import MultipleLocator
 import mitsuba
 mitsuba.set_variant("scalar_rgb")
 
-from mitsuba.core import xml
+from mitsuba.core import load_dict
 
 def plot_samples(sampler_dict, filename, grid_on=True, proj_1d=True, dim_offset=0):
-    sampler = xml.load_dict(sampler_dict)
+    sampler = load_dict(sampler_dict)
     sample_count = sampler.sample_count()
 
     sampler.seed(0)

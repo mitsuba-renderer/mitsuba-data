@@ -37,8 +37,7 @@ skip = [
 
 def load_scene(filename, *args, **kwargs):
     """Prepares the file resolver and loads a Mitsuba scene from the given path."""
-    from mitsuba.core.xml import load_file
-    from mitsuba.core import Thread
+    from mitsuba.core import load_file, Thread
 
     fr = Thread.thread().file_resolver()
     here = os.path.dirname(__file__)
