@@ -26,7 +26,7 @@
 	</sensor>
 
 
-	<bsdf type="disney" id="Material" >
+	<bsdf type="principled" id="Material" >
 		<rgb name="base_color" value="0.02, 0.02, 0.02"/>
 	</bsdf>
 

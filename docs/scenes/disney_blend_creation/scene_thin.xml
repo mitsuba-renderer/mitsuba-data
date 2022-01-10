@@ -25,9 +25,8 @@
 		</film>
 	</sensor>
 
-	<bsdf type="disney" id="Material" >
+	<bsdf type="principledthin" id="Material" >
 		<rgb name="base_color" value="1.0,1.0,1.0"/>
-        <boolean name="thin" value="true" />
 	</bsdf>
 
 	<bsdf type="twosided" id="Background" >
