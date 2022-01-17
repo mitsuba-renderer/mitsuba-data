@@ -1,7 +1,7 @@
 <scene version='2.0.0'>
     <path value="../../../common"/>
 
-    <bsdf type="principledthin" id="Material">
+    <bsdf type="principledthin" id="material">
         <rgb name="base_color" value="0.7,0.1,0.1 "/>
         <texture name="anisotropic" type="checkerboard">
             <transform name="to_uv">
@@ -35,8 +35,8 @@
         <float name="eta" value="1.33" />
     </bsdf>
 
-    <shape type="Rectangle">
-        <ref id="Material" />
+    <shape type="rectangle">
+        <ref id="material" />
         <transform name="to_world">
             <rotate y="1" angle="270"/>
             <scale value="0.7"/>
