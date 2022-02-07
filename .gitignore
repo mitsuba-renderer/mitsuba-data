@@ -1,3 +1,6 @@
 __pycache__
 _*.exr
 error_output
+
+# macOS
+\.DS_Store
