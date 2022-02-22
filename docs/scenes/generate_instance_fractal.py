@@ -1,10 +1,5 @@
-import enoki as ek
-import mitsuba
-
-mitsuba.set_variant("scalar_rgb")
-
-from mitsuba.core import ScalarVector3f
-
+import drjit as dr
+import mitsuba.scalar_rgb as mi
 
 def gen_string(center, scale):
 #     return """
@@ -46,14 +41,14 @@ def spawn_shapes(center, scale, depth):
     out = gen_string(center, scale)
 
     if (depth < max_depth):
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f( 1,  1,  1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f( 1,  1, -1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f( 1, -1,  1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f( 1, -1, -1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f(-1,  1,  1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f(-1,  1, -1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f(-1, -1,  1) + offset), factor * scale, depth + 1)
-        out += spawn_shapes(center + 1.5 * radius * scale * (ScalarVector3f(-1, -1, -1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f( 1,  1,  1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f( 1,  1, -1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f( 1, -1,  1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f( 1, -1, -1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f(-1,  1,  1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f(-1,  1, -1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f(-1, -1,  1) + offset), factor * scale, depth + 1)
+        out += spawn_shapes(center + 1.5 * radius * scale * (mi.ScalarVector3f(-1, -1, -1) + offset), factor * scale, depth + 1)
 
     return out
 
@@ -75,7 +70,7 @@ f.write("""
     </shape>
 """)
 
-f.write(spawn_shapes(ScalarVector3f(0), 1.0, 0))
+f.write(spawn_shapes(mi.ScalarVector3f(0), 1.0, 0))
 
 f.write("""
   <default name="spp" value="64"/>

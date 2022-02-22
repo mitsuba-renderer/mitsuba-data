@@ -1,11 +1,8 @@
 from matplotlib.transforms import offset_copy
-import mitsuba
-mitsuba.set_variant('scalar_rgb')
-from mitsuba.core import load_file
-from mitsuba.python.util import traverse
 import matplotlib.pyplot as plt
-from mitsuba.core import Bitmap, Struct
 import numpy as np
+
+import mitsuba.scalar_rgb as mi
 
 def create_images(scene, params, parameter_changed, mult=1.0, increment=0.0):
     images = []
@@ -13,7 +10,7 @@ def create_images(scene, params, parameter_changed, mult=1.0, increment=0.0):
         params['Material.' + parameter_changed] = j / 10 * mult + increment
         params.update()
         sensorIndex = 0
-        image = scene.render(seed=1, sensor_index=sensorIndex)
+        mi.render(scene, seed=1, sensor_index=sensorIndex)
         # Get the scene's sensor (if many, can pick one by specifying the
         # index)
         sensor = scene.sensors()[sensorIndex]
@@ -21,8 +18,8 @@ def create_images(scene, params, parameter_changed, mult=1.0, increment=0.0):
         film = sensor.film()
         img = film.bitmap()
         img = img.convert(
-            Bitmap.PixelFormat.RGB,
-            Struct.Type.UInt8,
+            mi.Bitmap.PixelFormat.RGB,
+            mi.Struct.Type.UInt8,
             srgb_gamma=True)
         image_np = np.array(img, copy=False)
         images.append(image_np)
@@ -31,8 +28,8 @@ def create_images(scene, params, parameter_changed, mult=1.0, increment=0.0):
 
 
 # 1st scene for thin
-scene = load_file('scene_thin.xml')
-params = traverse(scene)
+scene = mi.load_file('scene_thin.xml')
+params = mi.traverse(scene)
 
 # spec_trans
 params['Material.base_color.value'] = np.array([120, 20, 20]) / 256
@@ -58,8 +55,8 @@ params['Material.eta.value'] = 1.33
 images_anisotropic = create_images(scene, params, "anisotropic.value")
 
 # 2nd scene for thin
-scene = load_file('scene_thin_light.xml')
-params = traverse(scene)
+scene = mi.load_file('scene_thin_light.xml')
+params = mi.traverse(scene)
 params['Material.base_color.value'] = np.array([150, 220, 150]) / 256
 params['Material.roughness.value'] = 0.3
 params['Material.anisotropic.value'] = 0.0

@@ -4,7 +4,7 @@ import os
 import sys
 
 import numpy as np
-import mitsuba
+import mitsuba as mi
 
 # For some images, render in specific mode (e.g. polarized)
 mode_override = {
@@ -37,30 +37,27 @@ skip = [
 
 def load_scene(filename, *args, **kwargs):
     """Prepares the file resolver and loads a Mitsuba scene from the given path."""
-    from mitsuba.core import load_file, Thread
 
-    fr = Thread.thread().file_resolver()
+    fr = mi.Thread.thread().file_resolver()
     here = os.path.dirname(__file__)
     fr.append(here)
     fr.append(os.path.join(here, filename))
     fr.append(os.path.dirname(filename))
 
-    scene = load_file(filename, *args, **kwargs)
+    scene = mi.load_file(filename, *args, **kwargs)
     assert scene is not None
     return scene
 
 
 def render(scene, write_to):
-    from mitsuba.core import Bitmap, Struct
-
     success = scene.integrator().render(scene, 0, scene.sensors()[0])
     assert success
 
     film = scene.sensors()[0].film()
     bitmap = film.bitmap(raw=False)
 
-    if not bitmap.pixel_format() == Bitmap.PixelFormat.MultiChannel:
-        bitmap.convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
+    if not bitmap.pixel_format() == mi.Bitmap.PixelFormat.MultiChannel:
+        bitmap.convert(mi.Bitmap.PixelFormat.RGB, mi.Struct.Type.UInt8, True).write(write_to)
     elif bitmap.channel_count() == 16:
         # Stokes output, rather specialized for 'integrator_stokes_cbox' scene atm.
         data_np = np.array(bitmap, copy=False).astype(np.float)
@@ -69,10 +66,10 @@ def render(scene, write_to):
         s1 = np.dstack([np.maximum(0, -data_np[:, :, 7]),  np.maximum(0, data_np[:, :, 7]),  z])
         s2 = np.dstack([np.maximum(0, -data_np[:, :, 10]), np.maximum(0, data_np[:, :, 10]), z])
         s3 = np.dstack([np.maximum(0, -data_np[:, :, 13]), np.maximum(0, data_np[:, :, 13]), z])
-        Bitmap(s0).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to)
-        Bitmap(s1).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s1.jpg'))
-        Bitmap(s3).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s3.jpg'))
-        Bitmap(s2).convert(Bitmap.PixelFormat.RGB, Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s2.jpg'))
+        mi.Bitmap(s0).convert(mi.Bitmap.PixelFormat.RGB, mi.Struct.Type.UInt8, True).write(write_to)
+        mi.Bitmap(s1).convert(mi.Bitmap.PixelFormat.RGB, mi.Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s1.jpg'))
+        mi.Bitmap(s3).convert(mi.Bitmap.PixelFormat.RGB, mi.Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s3.jpg'))
+        mi.Bitmap(s2).convert(mi.Bitmap.PixelFormat.RGB, mi.Struct.Type.UInt8, True).write(write_to.replace('.jpg', '_s2.jpg'))
     else:
         for name, b in bitmap.split():
             if name == '<root>':
@@ -84,14 +81,14 @@ def render(scene, write_to):
                 min_val = np.min(data_np)
                 max_val = np.max(data_np)
                 data_np = (data_np - min_val) / (max_val - min_val)
-                b = Bitmap(data_np, Bitmap.PixelFormat.Y)
+                b = mi.Bitmap(data_np, mi.Bitmap.PixelFormat.Y)
 
             pixel_format = b.pixel_format()
-            if not pixel_format == Bitmap.PixelFormat.XYZ:
-                pixel_format = Bitmap.PixelFormat.RGB
+            if not pixel_format == mi.Bitmap.PixelFormat.XYZ:
+                pixel_format = mi.Bitmap.PixelFormat.RGB
 
             f_name = write_to if name == 'image' else write_to.replace('.jpg', '_%s.jpg' % name)
-            b.convert(pixel_format, Struct.Type.UInt8, True).write(f_name)
+            b.convert(pixel_format, mi.Struct.Type.UInt8, True).write(f_name)
 
 
 def main(args):
@@ -113,9 +110,9 @@ def main(args):
         if (not os.path.isfile(img_path) or force) and (not scene_name in skip):
             print(scene_path)
             if scene_name in mode_override.keys():
-                mitsuba.set_variant(mode_override[scene_name])
+                mi.set_variant(mode_override[scene_name])
             else:
-                mitsuba.set_variant("scalar_rgb")
+                mi.set_variant("scalar_rgb")
 
             scene_path = os.path.abspath(scene_path)
             scene = load_scene(scene_path, spp=spp)

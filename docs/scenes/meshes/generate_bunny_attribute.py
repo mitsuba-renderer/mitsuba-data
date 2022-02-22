@@ -1,14 +1,11 @@
 import os
 import numpy as np
 
-import mitsuba
-mitsuba.set_variant("scalar_rgb")
+import mitsuba.scalar_rgb as mi
 
-from mitsuba.core import load_string, Thread
+mi.Thread.thread().file_resolver().append(os.path.dirname(__file__ ) + '../../../common')
 
-Thread.thread().file_resolver().append(os.path.dirname(__file__ ) + '../../../common')
-
-m = load_string("""
+m = mi.load_string("""
         <shape type="ply" version="0.5.0">
             <string name="filename" value="meshes/bunny.ply"/>
         </shape>
