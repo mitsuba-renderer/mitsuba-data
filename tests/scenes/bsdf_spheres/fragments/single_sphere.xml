@@ -1,8 +1,9 @@
 <scene version='2.0.0'>
     <default name="spp" value="128"/>
+    <default name="integrator" value="path"/>
 
     <integrator type="moment">
-        <integrator type='path'>
+        <integrator type="$integrator">
             <integer name="max_depth" value="2"/>
         </integrator>
     </integrator>

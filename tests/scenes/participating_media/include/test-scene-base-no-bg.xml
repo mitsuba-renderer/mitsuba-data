@@ -2,8 +2,8 @@
 
     <include filename="include/preamble.xml"/>
 
-    <integrator type='moment'>
-        <integrator type='$volpathmis'>
+    <integrator type="moment">
+        <integrator type="$integrator">
             <integer name="max_depth" value="16"/>
         </integrator>
     </integrator>

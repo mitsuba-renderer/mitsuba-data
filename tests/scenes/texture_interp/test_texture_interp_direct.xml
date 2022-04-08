@@ -2,9 +2,10 @@
     <path value="../../../common"/>
 
     <default name="spp" value="4"/>
+    <default name="integrator" value="direct"/>
 
     <integrator type="moment">
-        <integrator type="direct"/>
+        <integrator type="$integrator"/>
     </integrator>
 
 	<sensor type="perspective">

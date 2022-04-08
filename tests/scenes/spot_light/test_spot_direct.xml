@@ -2,6 +2,7 @@
     <path value="../../../common"/>
 
     <default name="spp" value="32"/>
+    <default name="integrator" value="direct"/>
 
     <emitter id="light_0" type="constant">
         <spectrum name="radiance" value="0.1"/>
@@ -20,7 +21,7 @@
     </emitter>
 
     <integrator type="moment">
-        <integrator type="direct"/>
+        <integrator type="$integrator"/>
     </integrator>
 
     <sensor type="perspective">

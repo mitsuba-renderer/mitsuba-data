@@ -2,14 +2,15 @@
     <path value="../../../common"/>
 
     <default name="spp" value="32"/>
+    <default name="integrator" value="direct"/>
 
     <emitter type="directional">
         <vector name="direction" value="0,0,1"/>
-        <spectrum name="irradiance" value="1.0"/>
+        <spectrum name="irradiance" value="2.0"/>
     </emitter>
 
     <integrator type="moment">
-        <integrator type="direct"/>
+        <integrator type="$integrator"/>
     </integrator>
 
     <sensor type="perspective">
@@ -31,19 +32,25 @@
     </sensor>
 
 	<texture type="mesh_attribute" id="tex">
-		<string name="name" value="vertex_color"/>
+		<string name="name" value="face_weight"/>
 	</texture>
 
-	<bsdf type="diffuse" id="diffuse_bsdf">
-		<ref name="reflectance" id="tex"/>
-	</bsdf>
+    <bsdf type="blendbsdf" id="bsdf">
+        <ref name="weight" id="tex"/>
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0 .5 .5"/>
+        </bsdf>
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="1 1 0"/>
+        </bsdf>
+    </bsdf>
 
     <shape type="ply">
         <string name="filename" value="meshes/sphere_attribute.ply"/>
         <transform name="to_world">
             <translate value="0,0,1"/>
         </transform>
-        <ref id="diffuse_bsdf"/>
+        <ref id="bsdf"/>
     </shape>
 
 </scene>

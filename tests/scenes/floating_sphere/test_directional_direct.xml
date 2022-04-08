@@ -2,21 +2,22 @@
     <path value="../../../common"/>
 
     <default name="spp" value="32"/>
+    <default name="integrator" value="direct"/>
 
     <emitter type="directional">
-        <vector name="direction" value="0,0,1"/>
+        <vector name="direction" value="0,0,-1"/>
         <spectrum name="irradiance" value="1.0"/>
     </emitter>
 
     <integrator type="moment">
-        <integrator type="direct"/>
+        <integrator type="$integrator"/>
     </integrator>
 
     <sensor type="perspective">
         <transform name="to_world">
-            <lookat origin="0, 0,-5"
-                    target="0, 0, 0"
-                    up    ="0, 1, 0"/>
+            <lookat origin="0,-5,1  "
+                    target="0, 0,.5"
+                    up    ="0, 0,1  "/>
         </transform>
 
         <sampler type="independent">
@@ -30,20 +31,21 @@
         </film>
     </sensor>
 
-	<texture type="mesh_attribute" id="tex">
-		<string name="name" value="face_color"/>
-	</texture>
+    <bsdf id="diffuse_bsdf" type="diffuse">
+        <spectrum name="reflectance" value="1.0"/>
+    </bsdf>
 
-	<bsdf type="diffuse" id="diffuse_bsdf">
-		<ref name="reflectance" id="tex"/>
-	</bsdf>
+    <shape type="obj">
+        <string name="filename" value="meshes/rectangle.obj"/>
+        <ref id="diffuse_bsdf"/>
+    </shape>
 
-    <shape type="ply">
-        <string name="filename" value="meshes/sphere_attribute.ply"/>
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere.obj"/>
         <transform name="to_world">
+            <scale value="0.1"/>
             <translate value="0,0,1"/>
         </transform>
         <ref id="diffuse_bsdf"/>
     </shape>
-
 </scene>

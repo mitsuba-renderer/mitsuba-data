@@ -2,9 +2,10 @@
     <path value="../../../common"/>
 
     <default name="spp" value="64"/>
+    <default name="integrator" value="path"/>
 
-    <integrator type='moment'>
-        <integrator type='path'>
+    <integrator type="moment">
+        <integrator type="$integrator">
             <integer name="max_depth" value="2"/>
         </integrator>
     </integrator>

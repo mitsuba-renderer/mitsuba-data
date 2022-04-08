@@ -1,6 +1,8 @@
 <scene version='2.0.0'>
     <path value="../../../common"/>
 
+    <default name="integrator" value="volpath"/>
+
     <emitter type="envmap">
 		<string name="filename" value="textures/museum.exr"/>
 	</emitter>

@@ -2,9 +2,10 @@
     <path value="../../../common"/>
 
     <default name="spp" value="32"/>
+    <default name="integrator" value="direct"/>
 
-    <integrator type='moment'>
-        <integrator type="direct"/>
+    <integrator type="moment">
+        <integrator type="$integrator"/>
     </integrator>
 
     <sensor type="perspective">
@@ -40,9 +41,6 @@
             <lookat origin="0, 0, 1" target="0, 0, 0" up="0, 1, 0"/>
         </transform>
 
-        <texture type="bitmap" name="irradiance">
-            <string name="filename" value="textures/carrot.png"/>
-        </texture>
+        <spectrum name="irradiance" value="1"/>
     </emitter>
-
 </scene>
