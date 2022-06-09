@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<scene version="2.0.0" >
+<scene version="3.0.0" >
 	<integrator type="path" >
-		<integer name="max_depth" value="65" />		
+		<integer name="max_depth" value="65" />
 	</integrator>
 
 	<sensor type="perspective" >
@@ -58,5 +58,5 @@
             <scale value="1.35"/>
         </transform>
 	</shape>
-    
+
 </scene>

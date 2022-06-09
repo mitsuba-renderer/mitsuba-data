@@ -1,4 +1,4 @@
-<scene version="2.0.0">
+<scene version="3.0.0">
 	<default name="spp" value="64"/>
 	<default name="integrator" value="path"/>
 	<default name="rr_depth" value="5"/>

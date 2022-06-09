@@ -55,7 +55,7 @@ def spawn_shapes(center, scale, depth):
 
 f = open("shape_instance_fractal.xml", "w")
 f.write("""
-<scene version="2.0.0">
+<scene version="3.0.0">
     <path value="../../common"/>
 
 	<bsdf type="diffuse" id="object_bsdf">

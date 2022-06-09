@@ -1,7 +1,7 @@
 <!-- MI test scene from Eric Veach's thesis - modeled
      after a file by Steve Marschner (CS667)
 -->
-<scene version="2.0.0">
+<scene version="3.0.0">
     <path value="../../common"/>
 
 	<integrator type="direct">
