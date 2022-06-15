@@ -39,7 +39,7 @@
     <bsdf type="diffuse" id="light">
         <spectrum name="reflectance" value="400:0.78, 500:0.78, 600:0.78, 700:0.78"/>
     </bsdf>
-    <shape type="obj" id="box">
+    <shape type="obj">
         <string name="filename" value="meshes/cbox_luminaire.obj"/>
         <transform name="to_world">
             <translate x="0" y="-0.5" z="0"/>
