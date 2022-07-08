@@ -1,7 +1,10 @@
 <scene version="3.0.0">
-    <!-- <integrator type="direct"/> -->
+    <default name="spp" value="128"/>
+    <default name="res" value="256"/>
+    <default name="max_depth" value="6"/>
+
     <integrator type="path">
-        <integer name="max_depth" value="6"/>
+        <integer name="max_depth" value="$max_depth"/>
     </integrator>
 
     <sensor type="perspective">
@@ -16,11 +19,11 @@
                     up    ="  0,   1,    0"/>
         </transform>
         <sampler type="independent">  <!-- ldsampler -->
-            <integer name="sample_count" value="128"/>
+            <integer name="sample_count" value="$spp"/>
         </sampler>
         <film type="hdrfilm">
-            <integer name="width" value="256"/>
-            <integer name="height" value="256"/>
+            <integer name="width" value="$res"/>
+            <integer name="height" value="$res"/>
             <rfilter type="gaussian"/>
         </film>
     </sensor>
