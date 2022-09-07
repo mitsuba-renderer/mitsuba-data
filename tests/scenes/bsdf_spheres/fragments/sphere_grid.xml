@@ -126,7 +126,7 @@
         <bsdf type="roughplastic">
             <string name="distribution" value="beckmann"/>
             <float name="alpha" value="0.1"/>
-            <spectrum name="diffuse_reflectance" value="0"/>
+            <rgb name="diffuse_reflectance" value="0"/>
         </bsdf>
 
         <transform name="to_world">
@@ -141,7 +141,7 @@
         <bsdf type="roughplastic">
             <string name="distribution" value="beckmann"/>
             <float name="alpha" value="0.05"/>
-            <spectrum name="diffuse_reflectance" value="0.5"/>
+            <rgb name="diffuse_reflectance" value="0.5"/>
         </bsdf>
 
         <transform name="to_world">

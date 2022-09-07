@@ -27,7 +27,7 @@
 
     <shape type="rectangle">
         <bsdf type="diffuse">
-            <spectrum name="reflectance" value="1"/>
+            <rgb name="reflectance" value="1"/>
         </bsdf>
         <transform name="to_world">
             <scale value="1000"/>
@@ -41,6 +41,6 @@
             <lookat origin="0, 0, 1" target="0, 0, 0" up="0, 1, 0"/>
         </transform>
 
-        <spectrum name="irradiance" value="1"/>
+        <rgb name="irradiance" value="1"/>
     </emitter>
 </scene>

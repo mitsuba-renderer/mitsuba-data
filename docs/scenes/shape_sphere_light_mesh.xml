@@ -27,7 +27,7 @@
     </sensor>
 
     <emitter type="constant">
-        <spectrum name="radiance" value="0.1"/>
+        <rgb name="radiance" value="0.1"/>
     </emitter>
 
     <shape type="rectangle">
@@ -47,7 +47,7 @@
         <string name="filename" value="meshes/sphere.obj"/>
 
         <emitter type="area">
-            <spectrum name="radiance" value="20.0"/>
+            <rgb name="radiance" value="20.0"/>
         </emitter>
 
         <transform name="to_world">

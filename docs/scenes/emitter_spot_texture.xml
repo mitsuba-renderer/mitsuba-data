@@ -2,11 +2,11 @@
     <path value="../../common"/>
 
     <emitter type="constant">
-        <spectrum name="radiance" value="0.1"/>
+        <rgb name="radiance" value="0.1"/>
     </emitter>
 
     <emitter type="spot">
-        <spectrum name="intensity" value="200.0" />
+        <rgb name="intensity" value="200.0" />
         <float name="cutoff_angle" value="20" />
         <texture name="texture" type="bitmap">
             <string name="filename" value="textures/noise_01.jpg" />

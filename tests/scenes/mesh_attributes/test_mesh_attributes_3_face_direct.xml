@@ -6,7 +6,7 @@
 
     <emitter type="directional">
         <vector name="direction" value="0,0,1"/>
-        <spectrum name="irradiance" value="1.0"/>
+        <rgb name="irradiance" value="1.0"/>
     </emitter>
 
     <integrator type="moment">

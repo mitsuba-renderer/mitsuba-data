@@ -29,7 +29,7 @@
 		<transform name="to_world">
             <translate z="10"/>
 		</transform>
-        <spectrum name="intensity" value="100"/>
+        <rgb name="intensity" value="100"/>
     </emitter>
 
     <shape type="rectangle">

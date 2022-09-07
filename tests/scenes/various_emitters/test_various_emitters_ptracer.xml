@@ -39,7 +39,7 @@
 
 
     <bsdf id="white-bsdf" type="diffuse">
-        <spectrum name="reflectance" value="1.0"/>
+        <rgb name="reflectance" value="1.0"/>
     </bsdf>
 
     <shape type="rectangle" id="receiver-plane">
@@ -62,7 +62,7 @@
 
     <!-- EMITTERS -->
     <!-- <emitter id="light_0" type="constant">
-        <spectrum name="radiance" value="0.05"/>
+        <rgb name="radiance" value="0.05"/>
     </emitter> -->
     <!-- <emitter id="light_0" type="envmap">
         <string name="filename" value="textures/museum.exr"/>
@@ -98,7 +98,7 @@
     </shape>
 
     <emitter id="light_3" type="spot">
-        <spectrum name="intensity" value="15.0"/>
+        <rgb name="intensity" value="15.0"/>
         <float name="cutoff_angle" value="30"/>
         <float name="beam_width" value="15"/>
         <transform name="to_world">
@@ -107,7 +107,7 @@
     </emitter>
 
     <emitter id="light_4" type="spot">
-        <spectrum name="intensity" value="30.0"/>
+        <rgb name="intensity" value="30.0"/>
         <texture name="texture" type="bitmap">
             <string name="filename" value="textures/flower.bmp"/>
         </texture>
@@ -129,7 +129,7 @@
     </emitter>
 
     <emitter id="light_6" type="point">
-        <spectrum name="intensity" value="5.0"/>
+        <rgb name="intensity" value="5.0"/>
         <transform name="to_world">
             <lookat origin="-14, 2, 0" target="-14, 0, 0" up="0, 0, 1"/>
         </transform>

@@ -2,7 +2,7 @@
     <path value="../../common"/>
 
     <emitter type="constant">
-        <spectrum name="radiance" value="0.1"/>
+        <rgb name="radiance" value="0.1"/>
     </emitter>
 
     <emitter type="spot">
