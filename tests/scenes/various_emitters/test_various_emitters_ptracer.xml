@@ -55,7 +55,6 @@
         <transform name="to_world">
             <scale value="20.0, 3.0, 1.0"/>
             <rotate angle="180.0" y="1.0"/>
-            <!-- <rotate angle="90.0" x="1.0"/> -->
             <translate z="3.0"/>
         </transform>
     </shape>
@@ -82,12 +81,43 @@
         </emitter>
     </shape>
 
+    <shape type="obj">
+        <string name="filename" value="meshes/rectangle.obj"/>
+        <ref id="white-bsdf"/>
+        <transform name="to_world">
+            <scale value="1.0, 2.0, 1.0"/>
+            <rotate angle="110.0" x="1.0"/>
+            <translate x="5.25" y="2"/>
+        </transform>
+
+        <emitter type="area" id="light_1_mesh">
+            <texture name="radiance" type="bitmap">
+                <string name="filename" value="textures/flower.bmp"/>
+            </texture>
+        </emitter>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere.obj"/>
+        <ref id="white-bsdf"/>
+        <transform name="to_world">
+            <scale value="0.5"/>
+            <translate x="4.0" y="0.5" z="2"/>
+        </transform>
+
+        <emitter type="area" id="light_2_mesh">
+            <texture name="radiance" type="bitmap">
+                <string name="filename" value="textures/flower.bmp"/>
+            </texture>
+        </emitter>
+    </shape>
+
     <shape type="rectangle">
         <ref id="white-bsdf"/>
         <transform name="to_world">
-            <scale value="2.0, 2.0, 1.0"/>
+            <scale value="1.0, 2.0, 1.0"/>
             <rotate angle="110.0" x="1.0"/>
-            <translate x="4" y="2"/>
+            <translate x="2.75" y="2"/>
         </transform>
 
         <emitter type="area" id="light_2">
