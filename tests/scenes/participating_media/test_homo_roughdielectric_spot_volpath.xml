@@ -1,0 +1,47 @@
+<scene version='3.0.0'>
+    <path value="../../../common"/>
+
+    <default name="spp" value="64"/>
+    <default name="res" value="48"/>
+
+    <default name="integrator" value="volpath"/>
+
+    <include filename="include/test-scene-base-no-bg.xml"/>
+
+    <emitter type="spot">
+        <rgb name="intensity" value="1.0"/>
+        <float name="cutoff_angle" value="60"/>
+        <transform name="to_world">
+            <lookat target="0.0, 0.5, 0.0"
+                    origin="0.0, -0.5, -2.0"
+                    up    ="0.0, 1.0, 0.0"/>
+        </transform>
+	</emitter>
+
+    <medium id="medium1" type="homogeneous">
+        <rgb name="albedo" value="0.001, 0.005, 0.009"/>
+        <rgb name="sigma_t" value="0.002, 0.993, 0.003"/>
+        <phase type="isotropic" />
+        <float name="scale" value="1"/>
+    </medium>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere_tiny.obj"/>
+        <bsdf type="roughdielectric">
+            <float name="alpha" value="0.3"/>
+            <string name="int_ior" value="bk7"/>
+            <string name="ext_ior" value="air"/>
+        </bsdf>
+        <ref id="medium1" name="interior"/>
+    </shape>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere_base.obj"/>
+        <bsdf type="roughdielectric">
+            <float name="alpha" value="0.3"/>
+            <string name="int_ior" value="bk7"/>
+            <string name="ext_ior" value="air"/>
+        </bsdf>
+        <ref id="medium1" name="interior"/>
+    </shape>
+</scene>
