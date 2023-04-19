@@ -50,8 +50,8 @@ def load_scene(filename, *args, **kwargs):
 
 
 def render(scene, write_to):
-    success = scene.integrator().render(scene, 0, scene.sensors()[0])
-    assert success
+    success = scene.integrator().render(scene, sensor=scene.sensors()[0])
+    assert success is not None
 
     film = scene.sensors()[0].film()
     bitmap = film.bitmap(raw=False)
