@@ -1,0 +1,25 @@
+<scene version="3.0.0">
+    <path value="../../common"/>
+
+    <bsdf type="twosided" id="object_bsdf">
+        <bsdf type="diffuse">
+            <texture name="reflectance" type="checkerboard">
+                <transform name="to_uv">
+                    <scale x="2" y="10" />
+                </transform>
+            </texture>
+        </bsdf>
+    </bsdf>
+
+    <shape type="linearcurve">
+        <string name="filename" value="meshes/curve_doc.txt"/>
+		<transform name="to_world">
+			<rotate z="1" angle="225"/>
+			<translate x="0" y="0" z="2"/>
+			<scale x="2" y="1" z="0.5"/>
+		</transform>
+        <ref id="object_bsdf"/>
+    </shape>
+
+    <include filename="include/shape_scene.xml"/>
+</scene>
