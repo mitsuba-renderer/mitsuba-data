@@ -1,0 +1,28 @@
+<scene version="3.0.0">
+    <path value="../../common"/>
+
+    <bsdf type="diffuse" id="object_bsdf">
+        <rgb name="reflectance" value="0.2, 0.25, 0.7"/>
+    </bsdf>
+
+    <shape type="shapegroup" id="sdfgrid_group">
+        <shape type="sdfgrid">
+            <string name="filename" value="sdfgrid/torus_sdfgrid.vol"/>
+            <string name="normals" value="analytic" />
+            <ref id="object_bsdf"/>
+        </shape>
+    </shape>
+
+    <shape type="instance">
+        <ref id="sdfgrid_group"/>
+        <transform name="to_world">
+            <scale value="3 3 3" />
+            <rotate z="1" angle="225"/>
+            <rotate value="-0.6858837604522705, -0.7276307344436646, 0.010815560817718506" angle="60" />
+            <translate value="0.6858837604522705, 0.7276307344436646, 0.010815560817718506" />
+            <translate x="1.2" y="-0.4" z="-1.0"/>
+        </transform>
+    </shape>
+
+    <include filename="include/shape_scene.xml"/>
+</scene>
