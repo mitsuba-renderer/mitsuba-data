@@ -24,6 +24,8 @@ mode_override = {
     "bsdf_pplastic_diffuse_stokes": "scalar_spectral_polarized",
     "bsdf_pplastic_specular": "scalar_spectral_polarized",
     "bsdf_pplastic_specular_stokes": "scalar_spectral_polarized",
+    "bsdf_hair_blonde": "cuda_ad_rgb",
+    "bsdf_hair_brown": "cuda_ad_rgb",
 }
 
 # These renderings rely on external data that is too large to be part of the git repository.
