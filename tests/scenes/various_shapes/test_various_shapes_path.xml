@@ -121,7 +121,7 @@
         <ref id="object_bsdf"/>
         <transform name="to_world">
             <scale x="1.5" y="1.5" z="0.2"/>
-            <translate x="0.0" y="1" z="-5.0"/>
+            <translate x="0.0" y="2.5" z="-5.0"/>
             <rotate y="1.0" angle="25"/>
             <rotate z="1.0" angle="35"/>
         </transform>
@@ -131,9 +131,29 @@
         <ref id="object_bsdf"/>
         <transform name="to_world">
             <scale x="1.0" y="1.0" z="1.0"/>
-            <translate x="0.0" y="3" z="-5.0"/>
+            <translate x="0.0" y="4.5" z="-5.0"/>
             <rotate y="1.0" angle="25"/>
             <!-- <rotate z="1.0" angle="35"/> -->
+        </transform>
+    </shape>
+
+    <shape type="shapegroup" id="sdfgrid_group">
+        <shape type="sdfgrid">
+            <string name="filename" value="../../../docs/scenes/sdfgrid/torus_sdfgrid.vol"/>
+            <string name="normals" value="smooth" />
+            <ref id="object_bsdf"/>
+        </shape>
+    </shape>
+
+    <shape type="instance">
+        <ref id="sdfgrid_group"/>
+        <transform name="to_world">
+            <translate x="-0.5" y="-0.5" z="-0.5"/>
+            <scale value="2"/>
+            <scale value="2.5"/>
+            <rotate z="1" angle="260"/>
+            <rotate value="-0.6858837604522705, -0.7276307344436646, 0.010815560817718506" angle="60" />
+            <translate x="0.0" y="-3.5" z="-5.0"/>
         </transform>
     </shape>
 
