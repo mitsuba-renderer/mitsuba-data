@@ -34,7 +34,12 @@ aovs = dict(mutlichannel.split())
 normals = mi.TensorXf(aovs['sh_normal'])
 new_normals = dr.zeros(mi.Normal3f, normals.shape[0] * normals.shape[1])
 for i in range(3):
-    new_normals[i] = dr.ravel(normals)[i::3]
+    new_normals[i] = dr.gather(
+        mi.Float,
+        dr.ravel(normals),
+        i + dr.arange(mi.UInt32, normals.shape[0] * normals.shape[1]) * 3
+    )
+
 t = sensor.world_transform()
 new_normals = t.inverse() @ new_normals
 new_normals[0] = -new_normals[0]
@@ -56,7 +61,10 @@ optixDenoiser_bin = sys.argv[1]
 print(optixDenoiser_bin)
 
 process = subprocess.run([optixDenoiser_bin, "-o", "ref.exr", "noisy.exr"], check=True)
+mi.Bitmap("ref.exr").convert(component_format=mi.Struct.Type.Float32).write("ref.exr")
 process = subprocess.run([optixDenoiser_bin, "-a", "albedo.exr", "-o", "ref_albedo.exr", "noisy.exr"], check=True)
-process = subprocess.run([optixDenoiser_bin, "-a", "albedo.exr", "-o", "ref_albedo.exr", "noisy.exr"], check=True)
+mi.Bitmap("ref_albedo.exr").convert(component_format=mi.Struct.Type.Float32).write("ref_albedo.exr")
 process = subprocess.run([optixDenoiser_bin, "-a", "albedo.exr", "-n", "normals.exr", "-o", "ref_normals.exr", "noisy.exr"], check=True)
+mi.Bitmap("ref_normals.exr").convert(component_format=mi.Struct.Type.Float32).write("ref_normals.exr")
 process = subprocess.run([optixDenoiser_bin, "-a", "albedo.exr", "-n", "normals.exr", "-F", "1-1", "-f", "flow.exr", "-o", "ref_temporal.exr", "noisy.exr"], check=True)
+mi.Bitmap("ref_temporal.exr").convert(component_format=mi.Struct.Type.Float32).write("ref_temporal.exr")
