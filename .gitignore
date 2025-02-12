@@ -2,5 +2,7 @@ __pycache__
 _*.exr
 error_output
 
+sunsky/generation/build
+
 # macOS
 \.DS_Store
