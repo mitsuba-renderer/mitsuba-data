@@ -1,0 +1,29 @@
+<scene version='2.1.0'>
+    <path value="../../../common"/>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere.obj"/>
+
+        <bsdf type="normalmap">
+            <texture name="normalmap" type="bitmap">
+                <boolean name="raw" value="true"/>
+                <string name="filename" value="textures/floor_tiles_normalmap.jpg"/>
+            </texture>
+            <!-- Some anisotropic "reflective" microfacet BSDF -->
+            <bsdf type="roughconductor">
+                <string name="material" value="Al" />
+                <string name="distribution" value="ggx" />
+                <float name="alpha_u" value="0.25" />
+                <float name="alpha_v" value="0.05" />
+            </bsdf>
+        </bsdf>
+        <!-- Some transformation to produce non-trivial shading frames -->
+        <transform name="to_world">
+			<rotate z="1" angle="30"/>
+			<rotate y="1" angle="30"/>
+			<rotate x="1" angle="30"/>
+        </transform>
+    </shape>
+
+    <include filename="fragments/single_sphere.xml"/>
+</scene>
