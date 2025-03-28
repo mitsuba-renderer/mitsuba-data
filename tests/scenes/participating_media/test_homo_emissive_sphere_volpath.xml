@@ -1,0 +1,48 @@
+<scene version='2.0.0'>
+    <path value="../../../common"/>
+
+    <default name="integrator" value="volpath"/>
+
+    <include filename="include/test-scene-base-no-bg-midplane-cam.xml"/>
+
+    <medium id="medium1" type="heterogeneous">
+        <float name="scale" value="1.0"/>
+        <volume name="sigma_t" type="constvolume">
+            <transform name="to_world">
+                <scale value="8,8,8"/>
+                <translate value="-4,-4,-4"/>
+            </transform>
+            <float name="value" value="0.0"/>
+        </volume>
+        <volume name="sigma_n" type="constvolume">
+            <transform name="to_world">
+                <scale value="8,8,8"/>
+                <translate value="-4,-4,-4"/>
+            </transform>
+            <float name="value" value="1"/>
+        </volume>
+        <rgb name="albedo" value="0.0, 0.0, 0.0"/>
+        <string name="medium_sampling_mode" value="analogue"/>
+        <phase type="isotropic" />
+    </medium>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/sphere_origin.obj"/>
+        <bsdf type="null"/>
+        <ref id="medium1" name="interior"/>
+        <emitter type='volumelight'>
+            <rgb name='radiance' value='1, 1, 1'/>
+        </emitter>
+    </shape>
+<!--    <emitter type="point">-->
+<!--        <rgb name="intensity" value="1,1,1"/>-->
+<!--    </emitter>-->
+<!--    <shape type="sphere">-->
+<!--        <bsdf type="null"/>-->
+<!--        <float name="radius" value="1.0"/>-->
+<!--        <ref id="medium1" name="interior"/>-->
+<!--        <emitter type='volumelight'>-->
+<!--            <rgb name='radiance' value='1, 1, 1'/>-->
+<!--        </emitter>-->
+<!--    </shape>-->
+</scene>
