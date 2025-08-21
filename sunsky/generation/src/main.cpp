@@ -25,10 +25,15 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include <stdexcept>
 #include <string>
 #include <memory>
 #include <fstream>
 #include <iostream>
+#include <string_view>
+#include <vector>
+#include <unordered_map>
 
 /// Number of spectral channels in the skylight model
 static const constexpr size_t WAVELENGTH_COUNT = 11;
@@ -73,64 +78,106 @@ constexpr size_t l_spec_shape[L_DIM] = {WAVELENGTH_COUNT, ALBEDO_LVLS, TURBITDIT
 constexpr size_t f_tri_shape[F_DIM] = {3, ALBEDO_LVLS, TURBITDITY_LVLS, SKY_CTRL_PTS, SKY_PARAMS};
 constexpr size_t l_tri_shape[L_DIM] = {3, ALBEDO_LVLS, TURBITDITY_LVLS, SKY_CTRL_PTS};
 
-/// Helper struct to link the dataset metadata
-struct DatasetMetadata {
-    size_t nb_dims;
-    const size_t* dim_size;
-    double** dataset;
+/// Type of a field in the \c Struct
+enum class Type : uint32_t {
+    // Invalid/unspecified
+    Invalid = 0,
+
+    // Signed and unsigned integer values
+    UInt8,  Int8,
+    UInt16, Int16,
+    UInt32, Int32,
+    UInt64, Int64,
+
+    // Floating point values
+    Float16, Float32, Float64,
 };
 
-constexpr DatasetMetadata f_spectral = {
-    F_DIM,
-    f_spec_shape,
+
+/// Helper struct to link the dataset metadata
+struct TensorField {
+	Type dtype;
+
+	std::vector<size_t> shape;
+
+	const void* data;
+
+	size_t offset = -1;
+};
+
+const TensorField f_spectral = {
+	Type::Float64,
+	std::vector<size_t>(f_spec_shape, f_spec_shape + F_DIM),
     datasets
 };
 
-constexpr DatasetMetadata l_spectral = {
-    L_DIM,
-    l_spec_shape,
+const TensorField l_spectral = {
+	Type::Float64,
+	std::vector<size_t>(l_spec_shape, l_spec_shape + L_DIM),
     datasetsRad
 };
 
-constexpr DatasetMetadata f_RGB = {
-    F_DIM,
-    f_tri_shape,
+const TensorField f_RGB = {
+	Type::Float64,
+	std::vector<size_t>(f_tri_shape, f_tri_shape + F_DIM),
     datasetsRGB
 };
 
-constexpr DatasetMetadata l_RGB = {
-    L_DIM,
-    l_tri_shape,
+const TensorField l_RGB = {
+	Type::Float64,
+	std::vector<size_t>(l_tri_shape, l_tri_shape + L_DIM),
     datasetsRGBRad
 };
 
-constexpr DatasetMetadata solar_dataset = {
-    4,
-    solar_shape,
+const TensorField solar_dataset = {
+	Type::Float64,
+	std::vector<size_t>(solar_shape, solar_shape + 4),
     solarDatasets
 };
 
-constexpr DatasetMetadata limb_darkening_dataset = {
-    2,
-    limb_darkening_shape,
+const TensorField limb_darkening_dataset = {
+	Type::Float64,
+	std::vector<size_t>(limb_darkening_shape, limb_darkening_shape + 2),
     limbDarkeningDatasets
 };
+
+
+uint64_t get_tensor_size(const std::vector<size_t>& shape) {
+	if (shape.size() == 0)
+		throw std::runtime_error("Empty tensor shape");
+	
+	uint64_t tensor_size = shape[0];
+	for (size_t i = 1; i < shape.size(); ++i) {
+		if (shape[i] == 0)
+			throw std::runtime_error("Got empty dimension");
+		
+		tensor_size *= shape[i];
+	}
+	
+	return tensor_size;
+}
 
 /** 
  * \brief Tiny file stream
  */
-class FileStream {
+class TensorFileStream {
 public:
-    FileStream(const std::string &p) : m_file(new std::fstream) {
-        m_file->open(p, std::ios::binary | std::ios::in | std::ios::out |
+    TensorFileStream(const std::string &p) : m_file(new std::fstream) {
+        m_file->open(p, std::ios::binary | std::ios::out |
                             std::ios::trunc);
         if (!m_file->good())
             throw std::runtime_error("I/O error while opening file!");
+
+		// Header: 12 bytes
+		write("tensor_file", 12);
+
+		// Version number: 2 * 1 byte
+		write<uint8_t>(1);
+		write<uint8_t>(0);
+
+		// Number of fields to be written on close
+		write<uint32_t>(-1);
     }
-
-    ~FileStream() { close(); };
-
-    void close() { m_file->close(); };
 
     void write(const void *p, size_t size) {
         m_file->write((char *) p, size);
@@ -141,17 +188,64 @@ public:
         }
     }
 
-    template <typename T> void write(const T &value) {
+	template <typename T> void write(const T &value) {
         write(&value, sizeof(T));
     }
 
-    template <typename T> void write_array(const T *value, size_t count) {
-        write(value, sizeof(T) * count);
+    void emplace_field(const std::string_view name, TensorField& field) {
+		m_fields[name] = field;
+
+		// Write tensor name
+        write<uint16_t>(name.length());
+		write(name.data(), name.length());
+		// Write number of dimensions
+		write<uint16_t>(field.shape.size());
+
+		write<uint8_t>((uint8_t) field.dtype);
+
+		// Save offset entry for this field, will be written to later
+		m_fields[name].offset = m_file->tellp();
+		// Write dummy offset
+		write<uint64_t>(-1);
+
+		for (const size_t size_value: field.shape)
+			write<uint64_t>(size_value);
+		
     }
 
+	~TensorFileStream() { close(); };
+
+    void close() {
+		// Write number of fields
+		uint64_t metadata_end = m_file->tellp();
+		m_file->seekp(nb_fields_offset);
+		write<uint32_t>(m_fields.size());
+		m_file->seekp(metadata_end);
+		
+		for (auto& [name, field] : m_fields) {
+			uint64_t tensor_offset = m_file->tellp();
+			m_file->seekp(field.offset);
+			write<uint64_t>(tensor_offset);
+			m_file->seekp(tensor_offset);
+
+			uint64_t tensor_size = get_tensor_size(field.shape);
+
+			// TODO may be needed to generalize
+			write(field.data, tensor_size * (field.dtype == Type::Float64 ? 8 : 4));
+
+			free((void *) field.data);
+
+		}
+
+		m_file->close(); 
+	}
+
 private:
+	const size_t nb_fields_offset = 14;
     std::unique_ptr<std::fstream> m_file;
+	std::unordered_map<std::string_view, TensorField> m_fields;
 };
+
 
 // CIE 1931 table
 static const double cie1931_tbl[95 * 3] = {
@@ -286,56 +380,33 @@ std::array<double, 3> linear_rgb_rec(double wavelength) {
     return {r, g, b};
 }
 
- /// Serializes the Limb Darkening dataset to a file
- /// \param path
- ///    Path of the file to write to
- void write_limb_darkening_data(const std::string& path) {
-    const auto [nb_dims, dim_size, p_dataset] = limb_darkening_dataset;
-    FileStream file(path);
+ /// Serializes the Limb Darkening dataset to a tensor field
+ TensorField get_limb_darkening_data() {
+    const auto [dtype, shape, data, _] = limb_darkening_dataset;
+	double** p_dataset = (double**) data;
 
-    // Write headers
-    file.write("SUN", 3);
-    file.write((uint32_t)0);
-
-    // Write tensor dimensions
-    file.write(nb_dims);
-
-    // Write shapes as [wavelengths x nb_params]
-    file.write(dim_size[0]);
-    file.write(dim_size[1]);
-
-    // Flatten the data to the file
+	double* dataset = (double*) calloc(WAVELENGTH_COUNT * SUN_LD_PARAMS, sizeof(double));
     for (size_t w = 0; w < WAVELENGTH_COUNT; ++w)
-        file.write_array(p_dataset[w], SUN_LD_PARAMS);
+		memcpy(dataset + w * SUN_LD_PARAMS, p_dataset[w], SUN_LD_PARAMS * sizeof(double));
 
-    file.close();
+	return TensorField {
+		dtype, shape, dataset
+	};
 }
 
 /// Precomputes the sun RGB dataset from the spectral dataset and
 /// the limb darkening dataset
-///
-/// \param path
-///     Path of the file to write to
-void write_sun_data_rgb(const std::string& path) {
-    const auto [nb_dims_solar, dim_size_solar, p_dataset_solar] = solar_dataset;
-    const auto [nb_dims_ld, dim_size_ld, p_dataset_ld] = limb_darkening_dataset;
-    FileStream file(path);
+TensorField get_sun_data_rgb() {
+    const auto [sun_rad_dtype, solar_shape, data_solar, _1] = solar_dataset;
+    const auto [ld_dtype, ld_shape, data_ld, _2] = limb_darkening_dataset;
+	double** p_dataset_solar = (double**) data_solar;
+	double** p_dataset_ld = (double**) data_ld;
 
-    // Write headers
-    file.write("SUN", 3);
-    file.write((uint32_t)0);
+	TensorField result = {
+		sun_rad_dtype, { TURBITDITY_LVLS, SUN_SEGMENTS, 3, SUN_CTRL_PTS, SUN_LD_PARAMS }, nullptr
+	};
 
-    // Write tensor dimensions
-    file.write((size_t) 5);
-
-    // Write reordered shapes
-    file.write((size_t) TURBITDITY_LVLS);
-    file.write((size_t) SUN_SEGMENTS);
-    file.write((size_t) 3); // RGB channels
-    file.write((size_t) SUN_CTRL_PTS);
-    file.write((size_t) SUN_LD_PARAMS);
-
-    size_t dst_idx = 0;
+	size_t dst_idx = 0;
     double* buffer = (double*)calloc(TURBITDITY_LVLS * SUN_SEGMENTS * 3 * SUN_CTRL_PTS * SUN_LD_PARAMS, sizeof(double));
 
     std::array<double, 3> rectifier_rgb;
@@ -363,34 +434,22 @@ void write_sun_data_rgb(const std::string& path) {
         }
     }
 
-    file.write_array(buffer, TURBITDITY_LVLS * SUN_SEGMENTS * 3 * SUN_CTRL_PTS * SUN_LD_PARAMS);
-    file.close();
-    free(buffer);
+	return TensorField {
+		sun_rad_dtype,
+		{ TURBITDITY_LVLS, SUN_SEGMENTS, 3, SUN_CTRL_PTS, SUN_LD_PARAMS }, 
+		buffer
+	};
 }
 
 /// Re-orders the sun spectral dataset from the original dataset
 /// From [wavelengths x turbidity x sun_segments x sun_ctrl_pts]
 /// to   [turbidity x sun_segments x wavelengths x sun_ctrl_pts]
-///
-/// \param path
-///     Path of the file to write to
-void write_sun_data_spectral(const std::string& path) {
-    const auto [nb_dims, dim_size, p_dataset] = solar_dataset;
-    FileStream file(path);
+TensorField get_sun_data_spectral() {
+    const auto [dtype, shape, data, _] = solar_dataset;
+	double** p_dataset = (double**) data;
 
-    // Write headers
-    file.write("SUN", 3);
-    file.write((uint32_t)0);
-
-    // Write tensor dimensions
-    file.write(nb_dims);
-
-    // Write reordered shapes
-    file.write(dim_size[(uint32_t)SunDataShapeIdx::TURBIDITY]);
-    file.write(dim_size[(uint32_t)SunDataShapeIdx::SUN_SEGMENTS]);
-    file.write(dim_size[(uint32_t)SunDataShapeIdx::WAVELENGTH]);
-    file.write(dim_size[(uint32_t)SunDataShapeIdx::SUN_CTRL_PTS]);
-
+	size_t idx = 0;
+	double* buffer = (double*) calloc(TURBITDITY_LVLS * SUN_SEGMENTS * WAVELENGTH_COUNT * SUN_CTRL_PTS, sizeof(double));
     for (size_t turb = 0; turb < TURBITDITY_LVLS; ++turb) {
         for (size_t segment = 0; segment < SUN_SEGMENTS; ++segment) {
             for (size_t lambda = 0; lambda < WAVELENGTH_COUNT; ++lambda) {
@@ -401,52 +460,46 @@ void write_sun_data_spectral(const std::string& path) {
                         (segment + 1) * SUN_CTRL_PTS -
                         (ctrl_pt + 1);
 
-                    file.write(p_dataset[lambda][src_global_offset]);
+                    buffer[idx++] = p_dataset[lambda][src_global_offset];
                 }
             }
         }
     }
 
-    file.close();
+	return TensorField {
+		dtype,
+		{ shape[(uint32_t)SunDataShapeIdx::TURBIDITY], 
+			shape[(uint32_t)SunDataShapeIdx::SUN_SEGMENTS], 
+			shape[(uint32_t)SunDataShapeIdx::WAVELENGTH], 
+			shape[(uint32_t)SunDataShapeIdx::SUN_CTRL_PTS]
+		},
+		buffer
+	};
 }
 
 
 /// Re-orders the sky dataset from the original dataset
 /// From [wavelengths/channels x albedo x turbidity x sky_ctrl_pts (x sky_params)]
 /// to   [turbidity x albedo x sky_ctrl_pts x wavelengths/channels (x sky_params)]
-///
-/// \param path
-///     Path of the file to write to
 /// \param dataset
 ///     Dataset metadata to write
-void write_sky_data(const std::string &path, const DatasetMetadata& dataset) {
-    std::cout << "path: " << path << std::endl;
-    const auto [nb_dims, dim_size, p_dataset] = dataset;
-    FileStream file(path);
+TensorField get_sky_data(const TensorField& dataset) {
+    const auto [dtype, shape, data, _] = dataset;
+	double** p_dataset = (double**) data;
 
-    // Write headers
-    file.write("SKY", 3);
-    file.write((uint32_t)0);
+	uint64_t tensor_size = get_tensor_size(shape);
+	std::vector<size_t> reordered_shape = {
+		shape[(uint32_t) SkyDataShapeIdx::TURBIDITY],
+		shape[(uint32_t) SkyDataShapeIdx::ALBEDO],
+		shape[(uint32_t) SkyDataShapeIdx::CTRL_PT],
+		shape[(uint32_t) SkyDataShapeIdx::WAVELENGTH]
+	};
 
-    // Write tensor dimensions
-    file.write(nb_dims);
+	if (shape.size() == F_DIM)
+		reordered_shape.push_back(shape[(uint32_t)SkyDataShapeIdx::PARAMS]);
 
-    size_t tensor_size = 1;
-    for (size_t dim = 0; dim < nb_dims; ++dim)
-        tensor_size *= dim_size[dim];
-
-    // Write reordered shapes
-    file.write(dim_size[(uint32_t) SkyDataShapeIdx::TURBIDITY]);
-    file.write(dim_size[(uint32_t) SkyDataShapeIdx::ALBEDO]);
-    file.write(dim_size[(uint32_t) SkyDataShapeIdx::CTRL_PT]);
-    file.write(dim_size[(uint32_t) SkyDataShapeIdx::WAVELENGTH]);
-
-    if (nb_dims == F_DIM)
-        file.write(dim_size[(uint32_t)SkyDataShapeIdx::PARAMS]);
-
-
-    const size_t nb_params = nb_dims == F_DIM ? SKY_PARAMS : 1,
-                 nb_colors = dim_size[(uint32_t)SkyDataShapeIdx::WAVELENGTH];
+    const size_t nb_params = shape.size() == F_DIM ? SKY_PARAMS : 1,
+                 nb_colors = shape[(uint32_t)SkyDataShapeIdx::WAVELENGTH];
 
     size_t dst_idx = 0;
     double* buffer = (double*)calloc(tensor_size, sizeof(double));
@@ -462,35 +515,38 @@ void write_sky_data(const std::string &path, const DatasetMetadata& dataset) {
                             t * (SKY_CTRL_PTS * nb_params) +
                             ctrl_idx * nb_params +
                             param_idx;
-                        buffer[dst_idx] = p_dataset[color_idx][src_global_offset];
-                        ++dst_idx;
+                        buffer[dst_idx++] = p_dataset[color_idx][src_global_offset];
                     }
                 }
             }
         }
     }
 
-    // Write the data from the dataset
-    file.write_array(buffer, tensor_size);
-
-    free(buffer);
-    file.close();
+	return TensorField {
+		dtype, reordered_shape, buffer
+	};
 }
 
 /// Generates the datasets files from the original, this function should not
 /// be called for each render job, only when the dataset files are lost.
-///
-/// \param path
-///     Where the dataset files will be written
-///            
 void write_sun_sky_model_data(const std::string &path) {
-    write_sky_data(path + "/sky_spec_params.bin", f_spectral);
-    write_sky_data(path + "/sky_spec_rad.bin", l_spectral);
-    write_sky_data(path + "/sky_rgb_params.bin", f_RGB);
-    write_sky_data(path + "/sky_rgb_rad.bin", l_RGB);
-    write_sun_data_spectral(path + "/sun_spec_rad.bin");
-    write_sun_data_rgb(path + "/sun_rgb_rad.bin");
-    write_limb_darkening_data(path + "/sun_spec_ld.bin");
+    TensorField sky_spec_params = get_sky_data(f_spectral),
+				sky_spec_rad = get_sky_data(l_spectral),
+				sky_rgb_params = get_sky_data(f_RGB),
+				sky_rgb_rad = get_sky_data(l_RGB),
+				sun_spec_rad = get_sun_data_spectral(),
+				sun_rgb_rad = get_sun_data_rgb(),
+    			sun_ld_field = get_limb_darkening_data();
+
+	TensorFileStream file(path + "/sunsky_datasets.bin");
+	file.emplace_field("sky_params_spec", sky_spec_params);
+	file.emplace_field("sky_rad_spec", sky_spec_rad);
+	file.emplace_field("sky_params_rgb", sky_rgb_params);
+	file.emplace_field("sky_rad_rgb", sky_rgb_rad);
+	file.emplace_field("sun_rad_spec", sun_spec_rad);
+	file.emplace_field("sun_ld_spec", sun_ld_field);
+	file.emplace_field("sun_rad_rgb", sun_rgb_rad);
+
 }
 
 int main(int argc, char *argv[]) {
