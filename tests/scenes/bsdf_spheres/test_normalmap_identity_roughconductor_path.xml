@@ -5,9 +5,10 @@
         <string name="filename" value="meshes/sphere.obj"/>
 
         <bsdf type="normalmap">
-            <spectrum name="normalmap" type="srgb">
-                <rgb name="color" value="0.5, 0.5, 1.0"/>
-            </spectrum>
+            <texture name="normalmap" type="rawconstant">
+                <vector name="value" value="0.5, 0.5, 1.0"/>
+            </texture>
+
             <!-- Some anisotropic "reflective" microfacet BSDF -->
             <bsdf type="roughconductor">
                 <string name="material" value="Al" />
