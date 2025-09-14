@@ -60,4 +60,23 @@ for z in range(res):
             albedo[z, y, x, 2] = albedo_f(x / res, y / res, z / res)
 
 albedo = np.clip(albedo, 0, 1)
+print(np.mean(albedo))
 write_binary_grid3d('textures/albedo.vol', albedo)
+
+
+radiance = np.zeros((res, res, res, 3))
+
+
+def radiance_f(x, y, z, phase):
+    r = np.sqrt(x**2 + y**2 + z**2)
+    return (np.cos((r - 1.05)*4*np.pi + phase) + 1) / 2
+
+
+for z in range(res):
+    for y in range(res):
+        for x in range(res):
+            radiance[z, y, x, 0] = 4 * radiance_f(2*(x/res - 0.5), 2*(y/res - 0.5), 2*(z/res - 0.5), 0.0)
+            radiance[z, y, x, 1] = 2 * radiance_f(2*(x/res - 0.5), 2*(y/res - 0.5), 2*(z/res - 0.5), np.pi/2)
+            radiance[z, y, x, 2] = (1 - radiance_f(2*(x/res - 0.5), 2*(y/res - 0.5), 2*(z/res - 0.5), np.pi/5))
+
+write_binary_grid3d('textures/radiance.vol', radiance)
