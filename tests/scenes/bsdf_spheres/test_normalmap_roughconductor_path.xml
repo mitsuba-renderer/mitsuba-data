@@ -8,6 +8,7 @@
             <texture name="normalmap" type="bitmap">
                 <boolean name="raw" value="true"/>
                 <string name="filename" value="textures/floor_tiles_normalmap.jpg"/>
+                <string name="format" value="variant"/>
             </texture>
             <!-- Some anisotropic "reflective" microfacet BSDF -->
             <bsdf type="roughconductor">
