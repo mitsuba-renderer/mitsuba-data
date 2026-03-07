@@ -1,0 +1,10 @@
+<!-- Data from https://journals.sagepub.com/doi/10.1177/1468087413497004 -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<rgb name="base_color" value="1.000, 0.970, 0.617"/>
+		<float name="roughness" value="0.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="1.0"/>
+		<float name="eta" value="1.427"/>	
+	</bsdf>
+</scene>

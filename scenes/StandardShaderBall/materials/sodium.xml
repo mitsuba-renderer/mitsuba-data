@@ -1,0 +1,7 @@
+<!-- Data from https://refractiveindex.info/?shelf=main&book=Na&page=Smith -->
+<scene version="3.0.0">
+	<bsdf type="conductor" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="eta" value="365:0.0611, 387:0.0651, 405:0.0690, 420:0.0677, 440:0.0683, 470:0.0661, 505:0.0628, 546:0.0586, 600:0.0526, 662:0.0485, 750:0.0495, 860:0.0530"/>
+		<spectrum name="k" value="365:1.3262, 387:1.4742, 405:1.5371, 420:1.6311, 440:1.7569, 470:1.8821, 505:2.0686, 546:2.2337, 600:2.4793, 662:2.7614, 750:3.2191, 860:3.7246"/>
+	</bsdf>
+</scene>

@@ -1,0 +1,7 @@
+<!-- Data from https://refractiveindex.info/?shelf=main&book=Cs&page=Monin -->
+<scene version="3.0.0">
+	<bsdf type="conductor" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="eta" value="366:0.667, 406:0.533, 436:0.432, 460:0.368, 492:0.315, 510:0.297, 546:0.269, 578:0.25, 620:0.242"/>
+		<spectrum name="k" value="366:0.233, 406:0.318, 436:0.426, 460:0.533, 492:0.678, 510:0.756, 546:0.906, 578:1.029, 620:1.182"/>
+	</bsdf>
+</scene>

@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/blob/dev/data/materials/lemon/nix_export.csv -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0283, 410:0.0330, 420:0.0420, 430:0.0527, 440:0.0667, 450:0.0758, 460:0.0949, 470:0.1177, 480:0.1375, 490:0.1644, 500:0.2087, 510:0.2693, 520:0.3270, 530:0.3749, 540:0.4127, 550:0.4338, 560:0.4519, 570:0.4785, 580:0.4971, 590:0.5127, 600:0.5224, 610:0.5294, 620:0.5334, 630:0.5358, 640:0.5408, 650:0.5475, 660:0.5375, 670:0.5340, 680:0.5389, 690:0.5496, 700:0.5637"/>
+		<float name="roughness" value="0.5"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

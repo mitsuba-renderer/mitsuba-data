@@ -1,0 +1,50 @@
+<scene version="3.0.0">
+	<shape type="ply" id="mesh-back" name="mesh-back">
+		<string name="filename" value="meshes/back.ply"/>
+		<ref id="mat-back.001"/>
+	</shape>
+	<shape type="ply" id="mesh-base" name="mesh-base">
+		<string name="filename" value="meshes/base.ply"/>
+		<ref id="mat-neutral.001"/>
+	</shape>
+	<shape type="ply" id="mesh-core" name="mesh-core">
+		<string name="filename" value="meshes/core.ply"/>
+		<ref id="mat-neutral.001"/>
+	</shape>
+	<shape type="ply" id="mesh-front" name="mesh-front">
+		<string name="filename" value="meshes/front.ply"/>
+		<ref id="mat-front.001"/>
+	</shape>
+	<shape type="ply" id="mesh-grid" name="mesh-grid">
+		<string name="filename" value="meshes/grid.ply"/>
+		<ref id="mat-ground.001"/>
+	</shape>
+	<shape type="ply" id="mesh-left" name="mesh-left">
+		<string name="filename" value="meshes/left.ply"/>
+		<ref id="mat-left.001"/>
+	</shape>
+	<shape type="ply" id="mesh-material_surface" name="mesh-material_surface">
+		<string name="filename" value="meshes/material_surface.ply"/>
+		<ref id="mat-material_surface"/>
+	</shape>
+	<shape type="ply" id="mesh-right" name="mesh-right">
+		<string name="filename" value="meshes/right.ply"/>
+		<ref id="mat-right.001"/>
+	</shape>
+	<shape type="ply" id="mesh-sss_bars" name="mesh-sss_bars">
+		<string name="filename" value="meshes/sss_bars.ply"/>
+		<ref id="mat-sss_bars.001"/>
+	</shape>
+	<shape type="ply" id="mesh-top" name="mesh-top">
+		<string name="filename" value="meshes/top.ply"/>
+		<ref id="mat-top.001"/>
+	</shape>
+	<shape type="ply" id="mesh-backplane" name="mesh-backplane">
+		<string name="filename" value="meshes/backplane.ply"/>
+		<ref id="default-bsdf"/>
+	</shape>
+	<shape type="ply" id="mesh-backplane_001" name="mesh-backplane_001">
+		<string name="filename" value="meshes/backplane_001.ply"/>
+		<ref id="default-bsdf"/>
+	</shape>
+</scene>

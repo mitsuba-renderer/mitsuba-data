@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/tree/main/data/materials/musou-black/ -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0069, 410:0.0068, 420:0.0070, 430:0.0076, 440:0.0071, 450:0.0072, 460:0.0080, 470:0.0079, 480:0.0073, 490:0.0071, 500:0.0069, 510:0.0067, 520:0.0065, 530:0.0066, 540:0.0066, 550:0.0064, 560:0.0063, 570:0.0065, 580:0.0065, 590:0.0065, 600:0.0066, 610:0.0066, 620:0.0066, 630:0.0066, 640:0.0065, 650:0.0068, 660:0.0073, 670:0.0078, 680:0.0082, 690:0.0087, 700:0.0096"/>
+		<float name="roughness" value="1.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

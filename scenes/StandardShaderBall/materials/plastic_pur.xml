@@ -1,0 +1,10 @@
+<!-- Data from https://patentscope.wipo.int/search/en/detail.jsf?docId=WO2011163461 -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<rgb name="base_color" value="1.0, 1.0, 1.0"/>
+		<float name="roughness" value="0.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="1.0"/>
+		<float name="eta" value="1.6"/>	
+	</bsdf>
+</scene>

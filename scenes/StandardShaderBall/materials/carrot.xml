@@ -1,0 +1,10 @@
+<!-- Data from https://spectraldb.com/measurements/00456/ -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0787, 410:0.0695, 420:0.0642, 430:0.0607, 440:0.0586, 450:0.0580, 460:0.0582, 470:0.0593, 480:0.0586, 490:0.0594, 500:0.0626, 510:0.0665, 520:0.0708, 530:0.0788, 540:0.1000, 550:0.1570, 560:0.2640, 570:0.3798, 580:0.4681, 590:0.5340, 600:0.5813, 610:0.6140, 620:0.6341, 630:0.6484, 640:0.6613, 650:0.6689, 660:0.6704, 670:0.6686, 680:0.6840, 690:0.7029, 700:0.7083"/>
+		<float name="roughness" value="0.5"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

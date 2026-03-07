@@ -1,0 +1,47 @@
+<scene version="3.0.0">
+	<include filename="materials/$material.xml"/>
+	<bsdf type="diffuse" id="mat-back.001" name="mat-back.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/wall_back.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-neutral.001" name="mat-neutral.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/neutral.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-front.001" name="mat-front.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/wall_front.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-ground.001" name="mat-ground.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/ground.ACEScg.4096.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-left.001" name="mat-left.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/wall_left.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-right.001" name="mat-right.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/wall_right.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-sss_bars.001" name="mat-sss_bars.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/sss_bars.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-top.001" name="mat-top.001">
+		<texture type="bitmap" name="reflectance">
+			<string name="filename" value="textures/wall_top.ACEScg.exr"/>
+		</texture>
+	</bsdf>
+	<bsdf type="twosided" id="default-bsdf" name="default-bsdf">
+		<bsdf type="diffuse">
+		</bsdf>
+	</bsdf>
+</scene>

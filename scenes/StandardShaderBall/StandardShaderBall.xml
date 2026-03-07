@@ -1,0 +1,18 @@
+
+<scene version="3.0.0">
+
+	<!-- These variables can be set via the command line, like: mitsuba ShaderBall.xml -Dmaterial="glass" -Dilluminant="d55" -Dspp=64 -Dresx=300 -Dresy=300 -o render.exr -->
+	<default name="material" value="gold"/> <!-- Full library of materials can be found under StandardShaderBall/materials  -->
+	<default name="illuminant" value="d65"/> <!-- Full library of illuminants can be found under StandardShaderBall/illuminants  -->
+	<default name="integrator" value="path"/> <!-- Choose between "path" or "volpath" depending on if the material needs to render volumetric effects such as absorption -->
+	<default name="spp" value="64"/> <!-- Samples per pixel  -->
+	<default name="max_depth" value="32" /> <!-- Specifies the longest path depth  -->
+	<default name="resx" value="600"/> <!-- Horizontal resolution  -->
+	<default name="resy" value="600"/> <!-- Vertical resolution  -->
+
+	<include filename="fragments/render.xml"/>
+	<include filename="fragments/materials.xml"/>
+	<include filename="illuminants/$illuminant.xml"/>
+	<include filename="fragments/geometry.xml"/>
+
+</scene>

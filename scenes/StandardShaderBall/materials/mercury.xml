@@ -1,0 +1,7 @@
+<!-- Data from https://refractiveindex.info/?shelf=3d&book=metals&page=mercury -->
+<scene version="3.0.0">
+	<bsdf type="conductor" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="eta" value="365:0.7130, 387:0.7982, 413:0.8980, 443:1.0270, 477:1.1860, 517:1.3833, 564:1.6209, 620:1.9099, 689:2.2842, 775:2.7461"/>
+		<spectrum name="k" value="365:3.0735, 387:3.2935, 413:3.5379, 443:3.8019, 477:4.0898, 517:4.4061, 564:4.7505, 620:5.1495, 689:5.5819, 775:6.0540"/>
+	</bsdf>
+</scene>
