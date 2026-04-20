@@ -40,7 +40,7 @@ for i in range(3):
         i + dr.arange(mi.UInt32, normals.shape[0] * normals.shape[1]) * 3
     )
 
-t = sensor.world_transform()
+t = sensor.world_transform().eval(0.0)
 new_normals = t.inverse() @ new_normals
 new_normals[0] = -new_normals[0]
 new_normals[2] = -new_normals[2]
