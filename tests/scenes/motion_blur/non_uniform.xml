@@ -1,0 +1,88 @@
+<scene version="3.0.0">
+    <path value="../../../common"/>
+
+    <integrator type="path"/>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="near_clip" value="0.1"/>
+        <float name="far_clip" value="100.0"/>
+        <float name="fov" value="45.0"/>
+        <float name="shutter_close" value="1"/>
+        <transform name="to_world">
+            <lookat origin="0, 5, -8"
+                    target="0, 1, 0"
+                    up    ="0, 1, 0"/>
+        </transform>
+        <film type="hdrfilm">
+            <integer name="width" value="512"/>
+            <integer name="height" value="512"/>
+        </film>
+        <sampler type="independent">
+            <integer name="sample_count" value="32"/>
+        </sampler>
+    </sensor>
+
+    <emitter type="directional">
+        <vector name="direction" value="0,-0.1,1"/>
+        <rgb name="irradiance" value="5.0"/>
+    </emitter>
+
+    <!-- Shape Groups -->
+    <shape type="shapegroup" id="sphere_group">
+        <shape type="sphere">
+            <float name="radius" value="0.8"/>
+            <bsdf type="diffuse">
+                <rgb name="reflectance" value="0.8 0.2 0.2"/>
+            </bsdf>
+        </shape>
+    </shape>
+
+    <shape type="shapegroup" id="cube_group">
+        <shape type="cube">
+            <bsdf type="diffuse">
+                <rgb name="reflectance" value="0.2 0.8 0.2"/>
+            </bsdf>
+        </shape>
+    </shape>
+
+    <!-- Instances -->
+    <!-- 1) Sphere with a complex non-uniform parabolic jump motion -->
+    <shape type="instance">
+        <ref id="sphere_group"/>
+        <animation name="animation">
+            <transform time="0.0">
+                <translate x="-2.0" y="1.4" z="0.0"/>
+            </transform>
+            <transform time="0.5">
+                <scale x="1.5" y="1.5" z="1.5"/>
+                <translate x="0.0" y="3.5" z="0.0"/>
+            </transform>
+            <transform time="1.0">
+                <translate x="2.0" y="1.4" z="0.0"/>
+            </transform>
+        </animation>
+    </shape>
+
+    <!-- 2) Box/Cube moving and rotating non-uniformly -->
+    <shape type="instance">
+        <ref id="cube_group"/>
+        <animation name="animation">
+            <transform time="0.0">
+                <scale x="0.7" y="0.7" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="0"/>
+                <translate x="2.0" y="0.4" z="-2.0"/>
+            </transform>
+            <transform time="0.5">
+                <scale x="0.7" y="0.7" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="30"/>
+                <translate x="1.0" y="0.3" z="-1.0"/>
+            </transform>
+            <transform time="1.0">
+                <scale x="0.7" y="0.7" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="180"/>
+                <translate x="-2.0" y="-0.8" z="2.0"/>
+            </transform>
+        </animation>
+    </shape>
+</scene>

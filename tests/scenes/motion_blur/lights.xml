@@ -1,0 +1,73 @@
+<scene version="3.0.0">
+    <path value="../../../common"/>
+
+    <integrator type="path"/>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="near_clip" value="0.1"/>
+        <float name="far_clip" value="100.0"/>
+        <float name="fov" value="45.0"/>
+        <float name="shutter_close" value="1.0"/>
+        <transform name="to_world">
+            <lookat origin="0, 8, -2"
+                    target="0, 0, 0"
+                    up    ="0, 0, 1"/>
+        </transform>
+        <film type="hdrfilm">
+            <integer name="width" value="256"/>
+            <integer name="height" value="256"/>
+        </film>
+        <sampler type="independent">
+            <integer name="sample_count" value="32"/>
+        </sampler>
+    </sensor>
+
+    <!-- Large static ground plane -->
+    <shape type="rectangle">
+        <transform name="to_world">
+            <scale x="50" y="50" z="1"/>
+            <rotate x="1" y="0" z="0" angle="-90"/>
+        </transform>
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0.5"/>
+        </bsdf>
+    </shape>
+
+    <!-- Static cylinder standing on the ground plane -->
+    <shape type="cylinder">
+        <point name="p0" x="0" y="0" z="0"/>
+        <point name="p1" x="0" y="2" z="0"/>
+        <float name="radius" value="0.5"/>
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0.7"/>
+        </bsdf>
+    </shape>
+
+    <!-- Animated Point Light (Reddish intensity) -->
+    <emitter type="point">
+        <animation name="to_world">
+            <transform time="0.0">
+                <translate x="-3.0" y="4.0" z="-2.0"/>
+            </transform>
+            <transform time="1.0">
+                <translate x="-1.0" y="4.0" z="-2.0"/>
+            </transform>
+        </animation>
+        <rgb name="intensity" value="30.0 5.0 5.0"/>
+    </emitter>
+
+    <!-- Animated Spot Light (Greenish intensity) - simulating directed area light -->
+    <emitter type="spot">
+        <animation name="to_world">
+            <transform time="0.0">
+                <lookat origin="3.0, 4.0, 2.0" target="0.0, 1.0, 0.0" up="0.0, 1.0, 0.0"/>
+            </transform>
+            <transform time="1.0">
+                <lookat origin="1.0, 3.0, 2.0" target="0.0, 1.0, 0.0" up="0.0, 1.0, 0.0"/>
+            </transform>
+        </animation>
+        <float name="cutoff_angle" value="45.0"/>
+        <rgb name="intensity" value="5.0 30.0 5.0"/>
+    </emitter>
+</scene>
