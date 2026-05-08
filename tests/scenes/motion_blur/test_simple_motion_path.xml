@@ -1,12 +1,14 @@
 <scene version="3.0.0">
     <path value="../../../common"/>
 
-    <integrator type="path"/>
+    <default name="integrator" value="path"/>
+    <integrator type="moment">
+        <integrator type="$integrator">
+            <integer name="max_depth" value="3"/>
+        </integrator>
+    </integrator>
 
     <sensor type="perspective">
-        <string name="fov_axis" value="smaller"/>
-        <float name="near_clip" value="0.1"/>
-        <float name="far_clip" value="100.0"/>
         <float name="fov" value="45.0"/>
         <float name="shutter_close" value="1.0"/>
         <transform name="to_world">
@@ -15,11 +17,12 @@
                     up    ="0, 1, 0"/>
         </transform>
         <film type="hdrfilm">
-            <integer name="width" value="256"/>
-            <integer name="height" value="256"/>
+            <rfilter type="box"/>
+            <integer name="width" value="48"/>
+            <integer name="height" value="48"/>
         </film>
         <sampler type="independent">
-            <integer name="sample_count" value="32"/>
+            <integer name="sample_count" value="$spp"/>
         </sampler>
     </sensor>
 
@@ -28,7 +31,6 @@
         <rgb name="irradiance" value="5.0"/>
     </emitter>
 
-    <!-- Shape Groups -->
     <shape type="shapegroup" id="sphere_group">
         <shape type="sphere">
             <float name="radius" value="0.8"/>
@@ -57,8 +59,6 @@
         </shape>
     </shape>
 
-    <!-- Instances -->
-    <!-- 1) Sphere with animated translation -->
     <shape type="instance">
         <ref id="sphere_group"/>
         <animation name="animation">
@@ -71,24 +71,67 @@
         </animation>
     </shape>
 
-    <!-- 2) Box/Cube with animated rotation -->
+
+    <!-- We use a large number of rotation keys here to ensure OptiX & Embree results match.
+    Embree uses SLERP to interpolate quaternions, and OptiX uses the cheaper NLERP. These
+    do not match for large rotations.
+    -->
     <shape type="instance">
         <ref id="cube_group"/>
         <animation name="animation">
             <transform time="0.0">
                 <scale x="0.7" y="1.2" z="0.7"/>
-                <rotate x="0" y="1" z="0" angle="0"/>
+                <rotate x="0" y="1" z="0" angle="0.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.111111">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="10.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.222222">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="20.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.333333">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="30.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.444444">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="40.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.555556">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="50.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.666667">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="60.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.777778">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="70.0"/>
+                <translate x="0.0" y="0.7" z="0.0"/>
+            </transform>
+            <transform time="0.888889">
+                <scale x="0.7" y="1.2" z="0.7"/>
+                <rotate x="0" y="1" z="0" angle="80.0"/>
                 <translate x="0.0" y="0.7" z="0.0"/>
             </transform>
             <transform time="1.0">
                 <scale x="0.7" y="1.2" z="0.7"/>
-                <rotate x="0" y="1" z="0" angle="90"/>
+                <rotate x="0" y="1" z="0" angle="90.0"/>
                 <translate x="0.0" y="0.7" z="0.0"/>
             </transform>
         </animation>
     </shape>
 
-    <!-- 3) Cylinder with animated scale -->
     <shape type="instance">
         <ref id="cylinder_group"/>
         <animation name="animation">
