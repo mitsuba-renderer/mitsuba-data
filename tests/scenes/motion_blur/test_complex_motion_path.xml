@@ -50,7 +50,7 @@
 
     <shape type="instance">
         <ref id="sphere_group"/>
-        <animation name="animation">
+        <animation name="to_world">
             <transform time="0.0">
                 <translate x="-2.0" y="1.4" z="0.0"/>
             </transform>
@@ -66,7 +66,7 @@
 
     <shape type="instance">
         <ref id="cube_group"/>
-        <animation name="animation">
+        <animation name="to_world">
             <transform time="0.0">
                 <scale x="0.7" y="0.7" z="0.7"/>
                 <translate x="2.0" y="0.4" z="-2.0"/>
