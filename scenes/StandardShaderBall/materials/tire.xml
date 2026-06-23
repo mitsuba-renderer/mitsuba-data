@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/tree/main/data/materials/tire/ -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0238, 410:0.0229, 420:0.0227, 430:0.0229, 440:0.0225, 450:0.0227, 460:0.0233, 470:0.0232, 480:0.0226, 490:0.0229, 500:0.0232, 510:0.0230, 520:0.0229, 530:0.0229, 540:0.0229, 550:0.0226, 560:0.0225, 570:0.0232, 580:0.0231, 590:0.0232, 600:0.0234, 610:0.0233, 620:0.0236, 630:0.0231, 640:0.0220, 650:0.0225, 660:0.0236, 670:0.0237, 680:0.0245, 690:0.0245, 700:0.0247"/>
+		<float name="roughness" value="0.7"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

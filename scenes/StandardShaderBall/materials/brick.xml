@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/blob/main/data/materials/brick/ -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0627, 410:0.0622, 420:0.0625, 430:0.0647, 440:0.0658, 450:0.0669, 460:0.0685, 470:0.0700, 480:0.0708, 490:0.0721, 500:0.0740, 510:0.0756, 520:0.0777, 530:0.0812, 540:0.0868, 550:0.0964, 560:0.1092, 570:0.1307, 580:0.1548, 590:0.1803, 600:0.2005, 610:0.2153, 620:0.2248, 630:0.2357, 640:0.2442, 650:0.2494, 660:0.2560, 670:0.2652, 680:0.2746, 690:0.2853, 700:0.2934"/>
+		<float name="roughness" value="0.9"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

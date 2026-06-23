@@ -1,0 +1,7 @@
+<!-- Data from https://refractiveindex.info/?shelf=main&book=Li&page=Rasigni -->
+<scene version="3.0.0">
+	<bsdf type="conductor" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="eta" value="359:0.3350, 394:0.3050, 435:0.2480, 486:0.2170, 551:0.2050, 636:0.2210, 751:0.2650, 918:0.3380"/>
+		<spectrum name="k" value="359:1.4500, 394:1.6000, 435:1.8200, 486:2.1100, 551:2.4800, 636:2.9400, 751:3.5400, 918:4.3600"/>
+	</bsdf>
+</scene>

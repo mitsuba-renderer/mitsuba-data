@@ -1,0 +1,10 @@
+<!-- Data from https://hypertextbook.com/facts/2006/TingTingLuo.shtml -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<rgb name="base_color" value="0.738, 0.687, 0.091"/>
+		<float name="roughness" value="0.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="1.0"/>
+		<float name="eta" value="1.47"/>	
+	</bsdf>
+</scene>

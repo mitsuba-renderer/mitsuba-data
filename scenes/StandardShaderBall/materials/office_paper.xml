@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/tree/main/data/materials/office-paper -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.2202, 410:0.4052, 420:0.6954, 430:0.8720, 440:0.9319, 450:0.9199, 460:0.9094, 470:0.9143, 480:0.9195, 490:0.9109, 500:0.8920, 510:0.8668, 520:0.8440, 530:0.8151, 540:0.8065, 550:0.8015, 560:0.7978, 570:0.7992, 580:0.7999, 590:0.8037, 600:0.8071, 610:0.8173, 620:0.8289, 630:0.8370, 640:0.8542, 650:0.8722, 660:0.8995, 670:0.9255, 680:0.9428, 690:0.9569, 700:0.9611"/>
+		<float name="roughness" value="0.8"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

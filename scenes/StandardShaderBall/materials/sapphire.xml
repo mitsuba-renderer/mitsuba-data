@@ -1,0 +1,10 @@
+<!-- Data from https://refractiveindex.info/?shelf=3d&book=crystals&page=sapphire -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<rgb name="base_color" value="0.670, 0.764, 0.855"/>
+		<float name="roughness" value="0.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="1.0"/>
+		<float name="eta" value="1.768"/>	
+	</bsdf>
+</scene>

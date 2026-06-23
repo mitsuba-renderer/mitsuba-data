@@ -1,0 +1,10 @@
+<!-- Data from https://github.com/AntonPalmqvist/physically-based-api/tree/main/data/materials/toner-black/ -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="base_color" value="400:0.0377, 410:0.0462, 420:0.0499, 430:0.0494, 440:0.0479, 450:0.0489, 460:0.0499, 470:0.0503, 480:0.0500, 490:0.0504, 500:0.0507, 510:0.0507, 520:0.0504, 530:0.0509, 540:0.0509, 550:0.0503, 560:0.0497, 570:0.0501, 580:0.0496, 590:0.0495, 600:0.0493, 610:0.0493, 620:0.0499, 630:0.0505, 640:0.0513, 650:0.0528, 660:0.0530, 670:0.0537, 680:0.0541, 690:0.0544, 700:0.0541"/>
+		<float name="roughness" value="0.5"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="0.0"/>
+		<float name="eta" value="1.5"/>
+	</bsdf>
+</scene>

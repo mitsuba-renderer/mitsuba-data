@@ -1,0 +1,26 @@
+<scene version="3.0.0">
+	<integrator type="$integrator" id="elm__0" name="elm__0">
+		<integer name="max_depth" value="$max_depth"/>
+	</integrator>
+	<sensor type="perspective" id="camera" name="camera">
+		<string name="fov_axis" value="x"/>
+		<float name="fov" value="23.670166"/>
+		<float name="principal_point_offset_x" value="0.000000"/>
+		<float name="principal_point_offset_y" value="-0.000000"/>
+		<float name="near_clip" value="0.100000"/>
+		<float name="far_clip" value="1000.000000"/>
+		<transform name="to_world">
+			<rotate x="1" angle="-139.9"/>
+			<rotate y="1" angle="-20"/>
+			<rotate z="1" angle="-180"/>
+			<translate value="6.531538 19.500002 17.948521"/>
+		</transform>
+		<sampler type="independent" name="sampler">
+			<integer name="sample_count" value="$spp"/>
+		</sampler>
+		<film type="hdrfilm" name="film">
+			<integer name="width" value="$resx"/>
+			<integer name="height" value="$resy"/>
+		</film>
+	</sensor>
+</scene>

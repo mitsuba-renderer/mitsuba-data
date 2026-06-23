@@ -1,0 +1,7 @@
+<!-- Data from https://refractiveindex.info/?shelf=main&book=W&page=Werner-DFT -->
+<scene version="3.0.0">
+	<bsdf type="conductor" id="mat-material_surface" name="mat-material_surface">
+		<spectrum name="eta" value="381:3.6234, 413:3.7317, 451:3.7318, 496:3.7821, 551:3.9259, 620:4.0413, 708:3.9324, 827:3.3843"/>
+		<spectrum name="k" value="381:3.0432, 413:2.9364, 451:2.9424, 496:3.0370, 551:3.1105, 620:3.0797, 708:2.9524, 827:3.1507"/>
+	</bsdf>
+</scene>

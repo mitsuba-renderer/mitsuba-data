@@ -1,0 +1,10 @@
+<!-- Data from https://refractiveindex.info/?shelf=3d&book=plastics&page=pc -->
+<scene version="3.0.0">
+	<bsdf type="principled" id="mat-material_surface" name="mat-material_surface">
+		<rgb name="base_color" value="1.0, 1.0, 1.0"/>
+		<float name="roughness" value="0.0"/>
+		<float name="metallic" value="0.0"/>
+		<float name="spec_trans" value="1.0"/>
+		<float name="eta" value="1.585"/>	
+	</bsdf>
+</scene>
