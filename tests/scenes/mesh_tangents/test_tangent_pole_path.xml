@@ -1,0 +1,68 @@
+<scene version='2.1.0'>
+    <!-- A coarse UV sphere seen straight down its pole. The texture
+         parameterization winds around the pole, so the shading tangents
+         sweep a full turn across the ring of triangles that meet there. A
+         strongly anisotropic conductor turns that tangent field into a
+         visible pinwheel, which makes the image sensitive to the packed
+         tangent frame and to its interpolation. -->
+
+    <default name="spp" value="512"/>
+    <default name="integrator" value="path"/>
+
+    <integrator type="moment">
+        <integrator type="$integrator">
+            <integer name="max_depth" value="3"/>
+        </integrator>
+    </integrator>
+
+    <shape type="obj">
+        <string name="filename" value="meshes/uv_sphere.obj"/>
+        <bsdf type="roughconductor">
+            <string name="distribution" value="ggx"/>
+            <string name="material" value="Au"/>
+            <float name="alpha_u" value="0.4"/>
+            <float name="alpha_v" value="0.05"/>
+        </bsdf>
+    </shape>
+
+    <sensor type="perspective">
+        <float name="near_clip" value="1"/>
+        <float name="far_clip" value="100"/>
+        <float name="fov" value="32"/>
+
+        <transform name="to_world">
+            <lookat target="0.0, 0.0, 0.0"
+                    origin="0.0, 0.0, 4.0"
+                    up    ="0.0, 1.0, 0.0"/>
+        </transform>
+
+        <film type="hdrfilm">
+            <rfilter type="box"/>
+            <integer name="width" value="256"/>
+            <integer name="height" value="256"/>
+            <string name="pixel_format" value="rgb"/>
+            <string name="component_format" value="float32"/>
+        </film>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="$spp"/>
+        </sampler>
+    </sensor>
+
+    <!-- Off-axis area light: its reflection streaks along the local
+         tangent, so the highlight traces the parameterization -->
+    <shape type="rectangle">
+        <transform name="to_world">
+            <scale value="-3.0"/>
+            <rotate x="1" angle="-50"/>
+            <translate x="0.0" y="2.0" z="2.2"/>
+        </transform>
+        <emitter type="area">
+            <rgb name="radiance" value="2"/>
+        </emitter>
+    </shape>
+
+    <emitter type="constant">
+        <rgb name="radiance" value="0.2"/>
+    </emitter>
+</scene>

@@ -1,0 +1,70 @@
+<!--
+    Extreme close-up looking straight down at the pole of the material preview
+    ball, where the UV parameterization converges and the triangles fan out.
+
+    A rough conductor with strongly elongated microfacets (a 30:1 ratio between
+    alpha_u and alpha_v) orients its highlight along the shading tangent. At this
+    magnification a single triangle covers many pixels, so the smooth per-vertex
+    tangents that Mesh derives from the UV parameterization are plainly visible:
+    without them the shading tangent is constant within each triangle and the
+    highlight breaks up into flat-shaded facets.
+-->
+<scene version="3.0.0">
+    <path value="../../../scenes/matpreview"/>
+
+    <default name="spp" value="64"/>
+    <default name="integrator" value="path"/>
+
+    <integrator type="moment">
+        <integrator type="$integrator">
+            <integer name="max_depth" value="4"/>
+        </integrator>
+    </integrator>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="fov" value="2"/>
+        <transform name="to_world">
+            <lookat target="0, 0, 1.9155"
+                    origin="0, 0, 6"
+                    up="0, 1, 0"/>
+        </transform>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="$spp"/>
+        </sampler>
+
+        <film type="hdrfilm">
+            <integer name="width" value="64"/>
+            <integer name="height" value="48"/>
+            <rfilter type="box"/>
+        </film>
+    </sensor>
+
+    <emitter type="envmap">
+        <string name="filename" value="envmap.exr"/>
+        <transform name="to_world">
+            <rotate y="1" angle="-180"/>
+            <matrix value="-0.224951 -0.000001 -0.974370 0.000000 -0.974370 0.000000 0.224951 0.000000 0.000000 1.000000 -0.000001 8.870000 0.000000 0.000000 0.000000 1.000000"/>
+        </transform>
+        <float name="scale" value="3"/>
+    </emitter>
+
+    <bsdf type="roughconductor" id="bsdf-anisotropic">
+        <string name="material" value="none"/>
+        <string name="distribution" value="ggx"/>
+        <float name="alpha_u" value="0.3"/>
+        <float name="alpha_v" value="0.01"/>
+        <rgb name="specular_reflectance" value="0.85"/>
+    </bsdf>
+
+    <shape type="serialized">
+        <string name="filename" value="matpreview.serialized"/>
+        <integer name="shape_index" value="2"/>
+        <transform name="to_world">
+            <matrix value="0.614046 0.614047 0 -1.78814e-07 -0.614047 0.614046 0 2.08616e-07 0 0 0.868393 1.02569 0 0 0 1"/>
+            <translate z="0.01"/>
+        </transform>
+        <ref id="bsdf-anisotropic"/>
+    </shape>
+</scene>
