@@ -1,0 +1,46 @@
+<!--
+    Shared lighting and floor for the motion blur examples of the
+    "Animation and motion blur" chapter.
+
+    Unlike include/shape_scene.xml this include deliberately does *not* define a
+    sensor: the shutter interval (and, for the moving camera example, the sensor
+    animation itself) is part of what these scenes illustrate, so each of them
+    spells its sensor out.
+-->
+<scene version="3.0.0">
+    <default name="integrator" value="path"/>
+    <default name="envmap_scale" value="3"/>
+
+    <integrator type="$integrator"/>
+
+    <emitter type="envmap" id="envmap">
+        <string name="filename" value="textures/museum.exr"/>
+        <transform name="to_world">
+            <rotate y="1" angle="-180"/>
+            <matrix value="-0.224951 -0.000001 -0.974370 0.000000 -0.974370 0.000000 0.224951 0.000000 0.000000 1.000000 -0.000001 8.870000 0.000000 0.000000 0.000000 1.000000 "/>
+        </transform>
+        <float name="scale" value="$envmap_scale"/>
+    </emitter>
+
+    <texture type="checkerboard" id="planetex">
+        <rgb name="color0" value="0.2"/>
+        <rgb name="color1" value="0.4"/>
+        <transform name="to_uv">
+            <matrix value="8 0 0 0 0 8 0 0 0 0 8 0 0 0 0 1"/>
+        </transform>
+    </texture>
+
+    <bsdf type="diffuse" id="planemat">
+        <ref name="reflectance" id="planetex"/>
+    </bsdf>
+
+    <shape type="serialized" id="floor">
+        <string name="filename" value="meshes/matpreview.serialized"/>
+        <integer name="shape_index" value="0"/>
+        <transform name="to_world">
+            <rotate z="1" angle="-4.3"/>
+            <matrix value="3.38818 -4.06354 0 -1.74958 4.06354 3.38818 0 1.43683 0 0 5.29076 -0.0120714 0 0 0 1"/>
+        </transform>
+        <ref name="bsdf" id="planemat"/>
+    </shape>
+</scene>

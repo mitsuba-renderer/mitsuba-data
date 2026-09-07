@@ -1,0 +1,76 @@
+<!--
+    Motion blur from an animated shape.
+
+    Shapes are animated through the 'instance' plugin: the geometry lives in a
+    shapegroup, and the instance referencing it carries the keyframes.
+-->
+<scene version="3.0.0">
+    <path value="../../common"/>
+
+    <bsdf type="twosided" id="object_bsdf">
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0.2, 0.25, 0.7"/>
+        </bsdf>
+    </bsdf>
+
+    <shape type="shapegroup" id="bunny_group">
+        <shape type="ply">
+            <string name="filename" value="meshes/bunny.ply"/>
+            <transform name="to_world">
+                <scale value="12"/>
+                <rotate z="1" angle="130"/>
+                <rotate y="1" angle="70"/>
+                <rotate x="1" angle="-50"/>
+                <rotate z="1" angle="-50"/>
+                <rotate y="1" angle="-2"/>
+                <rotate x="1" angle="12"/>
+                <translate x="0.3" y="0" z="-0.3"/>
+            </transform>
+            <ref id="object_bsdf"/>
+        </shape>
+    </shape>
+
+    <!-- Sweeps across the field of view while turning -->
+    <shape type="instance">
+        <ref id="bunny_group"/>
+        <animation name="to_world">
+            <transform time="0">
+                <rotate z="1" angle="-3"/>
+                <translate x="-0.069" y="-0.073" z="0"/>
+            </transform>
+            <transform time="1">
+                <rotate z="1" angle="3"/>
+                <translate x="0.069" y="0.073" z="0"/>
+            </transform>
+        </animation>
+    </shape>
+
+    <sensor type="perspective">
+        <string name="fov_axis" value="smaller"/>
+        <float name="fov" value="28.8415"/>
+        <float name="focus_distance" value="6.0"/>
+
+        <!-- Each ray draws its time uniformly from [shutter_open,
+             shutter_close]. Without this the scene renders frozen at time 0. -->
+        <float name="shutter_open" value="0"/>
+        <float name="shutter_close" value="1"/>
+
+        <transform name="to_world">
+            <lookat target="3.04072, -2.85176, 2.80939"
+                    origin="3.69558, -3.46243, 3.25463"
+                    up="-0.317366, 0.312466, 0.895346"/>
+        </transform>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="256"/>
+        </sampler>
+
+        <film type="hdrfilm">
+            <integer name="width" value="960"/>
+            <integer name="height" value="720"/>
+            <rfilter type="gaussian"/>
+        </film>
+    </sensor>
+
+    <include filename="include/animation_scene.xml"/>
+</scene>
