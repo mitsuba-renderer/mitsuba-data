@@ -35,6 +35,10 @@ skip = [
     "bsdf_measured_polarized_gold_stokes",
     "bsdf_measured_polarized_fakegold",
     "bsdf_measured_polarized_fakegold_stokes",
+
+    # Rendered with several parameter sets into a hand-assembled figure,
+    # see the header of the scene file
+    "texture_bitmap_filtering",
 ]
 
 def load_scene(filename, *args, **kwargs):

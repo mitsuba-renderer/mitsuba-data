@@ -1,0 +1,69 @@
+<!-- Texture filtering test scene after Figure 9 of Akenine-Moller et al.,
+     "Improved Shader and Texture Level of Detail Using Ray Cones" (JCGT 2021).
+
+     Run as follows:
+
+       mitsuba -D spp=1024 -o reference.exr texture_bitmap_filtering.xml
+       mitsuba -D jitter=false -D filter_type=bilinear -o unfiltered.exr texture_bitmap_filtering.xml
+       mitsuba -D jitter=false -D filter_type=trilinear -o isotropic.exr texture_bitmap_filtering.xml
+       mitsuba -D jitter=false -D filter_type=anisotropic -o anisotropic.exr texture_bitmap_filtering.xml
+
+     Add '-D cone_scale=2' or similar to bias the level of detail. -->
+<scene version="3.0.0">
+    <default name="spp" value="1"/>
+    <default name="res" value="400"/>
+    <default name="filter_type" value="bilinear"/>
+    <default name="jitter" value="true"/>
+    <default name="cone_scale" value="1"/>
+
+    <!-- BSDF sampling alone is exact for a diffuse surface under a constant
+         emitter, so the only source of noise is the texture. -->
+    <integrator type="direct">
+        <integer name="emitter_samples" value="0"/>
+        <integer name="bsdf_samples" value="1"/>
+    </integrator>
+
+    <sensor type="perspective">
+        <float name="fov" value="60"/>
+        <boolean name="jitter" value="$jitter"/>
+        <float name="cone_scale" value="$cone_scale"/>
+        <transform name="to_world">
+            <lookat origin="0, 0, 1" target="0, 3.5, 0" up="0, 0, 1"/>
+        </transform>
+
+        <sampler type="independent">
+            <integer name="sample_count" value="$spp"/>
+        </sampler>
+
+        <film type="hdrfilm">
+            <integer name="width" value="$res"/>
+            <integer name="height" value="$res"/>
+            <string name="pixel_format" value="rgb"/>
+            <rfilter type="box"/>
+        </film>
+    </sensor>
+
+    <emitter type="constant">
+        <rgb name="radiance" value="0.7, 0.85, 1.0"/>
+    </emitter>
+
+    <!-- The plane spans [-1000, 1000]^2, and each repeat of the 2x2
+         checkerboard texture covers squares of size 0.25 -->
+    <shape type="rectangle">
+        <transform name="to_world">
+            <scale x="1000" y="1000"/>
+            <rotate z="1" angle="45"/>
+        </transform>
+        <bsdf type="diffuse">
+            <texture type="bitmap" name="reflectance">
+                <string name="filename" value="textures/checkerboard.png"/>
+                <string name="filter_type" value="$filter_type"/>
+                <integer name="max_anisotropy" value="16"/>
+                <string name="wrap_mode" value="repeat"/>
+                <transform name="to_uv">
+                    <scale x="4000" y="4000"/>
+                </transform>
+            </texture>
+        </bsdf>
+    </shape>
+</scene>
