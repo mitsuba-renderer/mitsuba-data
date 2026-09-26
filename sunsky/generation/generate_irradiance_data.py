@@ -86,7 +86,7 @@ if __name__ == "__main__":
     emitter_params = mi.traverse(emitter)
 
     res = 200
-    quad_points, weights = mi.quad.gauss_legendre(res)
+    quad_points, weights = dr.quad.gauss_legendre(mi.Float, res)
 
     res = (10, 30)
     turbs = np.linspace(1, 10, res[0])
