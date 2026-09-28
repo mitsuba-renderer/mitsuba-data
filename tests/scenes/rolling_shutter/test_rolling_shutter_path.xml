@@ -1,0 +1,12 @@
+<scene version="3.0.0">
+    <default name="spp" value="128"/>
+    <default name="integrator" value="path"/>
+
+    <integrator type="moment">
+        <integrator type="$integrator">
+            <integer name="max_depth" value="3"/>
+        </integrator>
+    </integrator>
+
+    <include filename="fragments/scene.xml"/>
+</scene>

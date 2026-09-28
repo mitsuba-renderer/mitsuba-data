@@ -1,0 +1,62 @@
+<scene version="3.0.0">
+    <sensor type="perspective">
+        <float name="fov" value="45"/>
+        <float name="shutter_open" value="0.0"/>
+        <float name="shutter_close" value="1.0"/>
+        <string name="rolling_shutter_type" value="top"/>
+        <float name="rolling_shutter_duration" value="0.5"/>
+        <animation name="to_world">
+            <transform time="0.0">
+                <lookat origin="-0.5, 0, 0" target="-0.5, 0, 5" up="0, 1, 0"/>
+            </transform>
+            <transform time="1.0">
+                <lookat origin="0.5, 0, 0" target="0.5, 0, 5" up="0, 1, 0"/>
+            </transform>
+        </animation>
+        <film type="hdrfilm">
+            <rfilter type="box"/>
+            <integer name="width" value="48"/>
+            <integer name="height" value="48"/>
+        </film>
+        <sampler type="independent">
+            <integer name="sample_count" value="$spp"/>
+        </sampler>
+    </sensor>
+
+    <emitter type="spot">
+        <rgb name="intensity" value="2000"/>
+        <float name="cutoff_angle" value="25"/>
+        <float name="beam_width" value="20"/>
+        <transform name="to_world">
+            <lookat origin="0, -1, -0.5" target="0, -3, -0.5" up="0, 0, 1"/>
+        </transform>
+    </emitter>
+
+    <shape type="rectangle">
+        <transform name="to_world">
+            <scale value="6"/>
+            <rotate x="1" angle="-90"/>
+            <translate y="-3" z="3"/>
+        </transform>
+        <bsdf type="diffuse">
+            <rgb name="reflectance" value="0.8"/>
+        </bsdf>
+    </shape>
+
+    <shape type="rectangle">
+        <transform name="to_world">
+            <scale value="4"/>
+            <rotate y="1" angle="180"/>
+            <translate z="5"/>
+        </transform>
+        <bsdf type="diffuse">
+            <texture type="checkerboard" name="reflectance">
+                <rgb name="color0" value="0.1"/>
+                <rgb name="color1" value="0.8"/>
+                <transform name="to_uv">
+                    <scale x="4" y="4"/>
+                </transform>
+            </texture>
+        </bsdf>
+    </shape>
+</scene>

@@ -1,0 +1,12 @@
+<scene version="3.0.0">
+    <default name="spp" value="128"/>
+    <default name="integrator" value="ptracer"/>
+
+    <!-- NOTE: the particle tracer does not support AOVs, the reference images
+         for test_renders.py are generated with test_rolling_shutter_path.xml -->
+    <integrator type="$integrator">
+        <integer name="max_depth" value="3"/>
+    </integrator>
+
+    <include filename="fragments/scene.xml"/>
+</scene>
