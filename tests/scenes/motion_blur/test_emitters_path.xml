@@ -1,6 +1,9 @@
 <scene version="3.0.0">
     <path value="../../../common"/>
 
+    <!-- The reference variance was recorded with uniform emitter selection -->
+    <boolean name="emitter_tree" value="false"/>
+
     <default name="integrator" value="path"/>
     <integrator type="moment">
         <integrator type="$integrator">
